@@ -1,0 +1,17 @@
+{
+  "id": "native-fp32-local-scale-v1",
+  "adopted": "2026-09-10",
+  "status": "frozen",
+  "feature_scale_factor": 0.0001,
+  "output_spacings": 8,
+  "probability_absolute": 0.0001,
+  "attribution_absolute": 0.00001,
+  "ranking_gap": 0.00002,
+  "threshold": 0.5,
+  "debounce": 2,
+  "window_samples": 500,
+  "context_samples": 250,
+  "stride_samples": 250,
+  "feature_names": ["mean", "std", "minimum", "maximum", "value_range", "rms", "skewness", "kurtosis", "energy", "derivative_std", "dominant_frequency_hz", "bandpower_0_5_2_hz", "bandpower_2_5_hz", "bandpower_ratio_0_5_2_to_2_5"],
+  "local_scales": ["rms", "absolute", "absolute_or_rms", "absolute_or_rms", "absolute", "absolute", "absolute_or_one", "absolute_or_one", "absolute", "absolute", "exact", "absolute", "absolute", "absolute_or_one"]
+}

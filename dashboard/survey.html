@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:,">
+  <title>TinyKAN dashboard survey</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="survey.css">
+</head>
+<body class="survey-page">
+  <a class="skip" href="#main">Skip to survey</a>
+
+  <header class="topbar">
+    <div class="brand">
+      <h1>TinyKAN <span>dashboard survey</span></h1>
+      <p class="disclaimer">Prototype. Not a diagnosis. The score is risk, not SpO2.</p>
+    </div>
+    <div class="progress">
+      <span class="tag pilot" id="pilotTag" hidden>Pilot</span>
+      <span id="stepText" aria-live="polite"></span>
+    </div>
+  </header>
+
+  <main id="main" class="survey">
+    <p class="banner warn" id="pilotBanner" hidden>
+      Pilot mode. Responses are saved to a separate test file and are not used in results.
+    </p>
+    <p class="banner error" id="serverBanner" hidden>
+      The survey server is not reachable. Open this page through the survey link, not as a file.
+    </p>
+
+    <!-- Step 0: information sheet and consent. Edit the text here. -->
+    <section class="step panel" data-step="info" aria-labelledby="infoTitle">
+      <h2 class="step-title" id="infoTitle">Information for participants</h2>
+      <div class="prose">
+        <p><strong>Study:</strong> User evaluation of an explainable oxygen-risk dashboard.</p>
+        <p><strong>Researcher:</strong> Jason Yong Sheng Ng, Bachelor of Engineering (Honours) (Software),
+          Swinburne University of Technology Sarawak.
+          <strong>Supervisor:</strong> Dr Sheena Punai Philimon.</p>
+
+        <h3>What is this about?</h3>
+        <p>The dashboard shows a score for short recordings from a finger pulse sensor
+          (10-second PPG windows). The score is how likely a window is Low-Oxygen Risk.
+          It also shows which signal features moved the score. We want to know whether people
+          read the screen correctly and whether the explanation is useful.</p>
+
+        <h3>What will I do?</h3>
+        <p>You will look at 4 recorded windows and answer a few questions about each, then
+          two short questionnaires. It takes about 10 minutes. The windows come from a public
+          research dataset (OpenOximetry). No sensor is used and none of your own body data is involved.</p>
+
+        <h3>What is collected?</h3>
+        <p>Your answers and how long each part took. We do not collect your name, email,
+          IP address, or any health data. Answers cannot be linked to you, so once you press
+          Submit they cannot be withdrawn.</p>
+
+        <h3>Do I have to take part?</h3>
+        <p>No. It is voluntary. You can stop at any time by closing the page. Nothing is saved
+          until you press Submit on the last page.</p>
+
+        <h3>How will results be used?</h3>
+        <p>Anonymous, combined results will appear in the final-year project report, paper, and
+          presentation. Data are kept on the researcher's computer in line with Swinburne research
+          data rules.</p>
+
+        <p>This prototype is not a medical device and does not give a diagnosis.</p>
+
+        <p><strong>Contact:</strong> <a href="mailto:102775928@students.swinburne.edu.my">102775928@students.swinburne.edu.my</a></p>
+        <p class="muted" id="ethicsLine" hidden></p>
+      </div>
+
+      <p class="banner" id="doneBefore" hidden>
+        This browser has already submitted a response. Thank you. Please do not submit twice.
+      </p>
+
+      <fieldset class="q consent" data-required>
+        <legend>Consent</legend>
+        <label class="check"><input type="checkbox" name="consent_read"> I have read the information above.</label>
+        <label class="check"><input type="checkbox" name="consent_adult"> I am 18 or older.</label>
+        <label class="check"><input type="checkbox" name="consent_agree"> I agree to take part.</label>
+      </fieldset>
+    </section>
+
+    <!-- Steps 1..7 are built by survey.js from survey_core.js. -->
+    <div id="generated"></div>
+
+    <section class="step panel" data-step="done" aria-labelledby="doneTitle" hidden>
+      <h2 class="step-title" id="doneTitle">Thank you</h2>
+      <p class="prose">Your response has been saved. You can close this page.</p>
+    </section>
+
+    <p class="form-error" id="formError" role="alert" hidden></p>
+
+    <nav class="step-nav" id="stepNav" aria-label="Survey steps">
+      <button type="button" id="backBtn">Back</button>
+      <button type="button" class="primary" id="nextBtn">Start</button>
+    </nav>
+  </main>
+
+  <script src="dashboard_core.js"></script>
+  <script src="dashboard_view.js"></script>
+  <script src="replay_windows.js"></script>
+  <script src="survey_core.js"></script>
+  <script src="survey.js"></script>
+</body>
+</html>

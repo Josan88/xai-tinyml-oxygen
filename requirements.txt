@@ -1,0 +1,13 @@
+# Host environment used for the results (Python 3.14.5).
+numpy==2.4.6
+pandas==3.0.3
+scipy==1.17.1
+scikit-learn==1.9.0
+matplotlib==3.10.9
+torch==2.12.0
+wfdb==4.3.1
+pyserial==3.5
+pytest==9.1.1
+# Optional, only for the peak-RAM image scan/emulation scripts and their tests:
+# pyelftools
+# unicorn

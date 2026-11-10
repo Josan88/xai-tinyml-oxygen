@@ -1,0 +1,1261 @@
+{
+  "script": "scripts/make_ieee_paper_results_figs_tinykan.py",
+  "model": "repo v2 (reported as TinyKAN; header kan_model_weights_v2.h; ADR-0006)",
+  "print_width_in": 3.263888888888889,
+  "min_font_pt": 8,
+  "dpi": 300,
+  "sources": {
+    "outputs/analysis-lamaakal-style-v1/c_per_fold.csv": {
+      "sha256": "a3f21b262b1aeb5c38dad24e42c4afe4b197a2c9a128deea8a852653af340df3",
+      "git_blob": "e064446bc93df5a917016c9d1a6a649c3e2f40cc",
+      "equals_head_blob": true
+    },
+    "outputs/analysis-lamaakal-style-v1/c_fold_summary.csv": {
+      "sha256": "1611d9da9211517db04f9b4bd613c477a68bcd82c74307a261096a53d3a3e139",
+      "git_blob": "50d4f026705ccb5ae165fd68860de2093c2b6153",
+      "equals_head_blob": true
+    },
+    "outputs/analysis-lamaakal-style-v1/a_baselines.csv": {
+      "sha256": "304e59aa09c0569af600f06c4ace812d1a4d2aea54c789dda1b7ba105e766f81",
+      "git_blob": "3ad9e243d4ff029192d64e4bbefd1d8e817d64fb",
+      "equals_head_blob": true
+    },
+    "outputs/analysis-lamaakal-style-v1/g_error_by_spo2_distance.csv": {
+      "sha256": "79b1ce1d4bc0177eee5ddec8ce6ba50af552f77148e09f1e2ec0ad72160d0c89",
+      "git_blob": "92ddb005fe9c65d59069762bb88c92821ca3c84c",
+      "equals_head_blob": true
+    },
+    "outputs/analysis-lamaakal-style-v1/d_aopc_v2_new_run.csv": {
+      "sha256": "ad106fd8df92bf27abdeb437d47b1d0c3138899673c286393c422a3b02b47583",
+      "git_blob": "fb14e81d6fe35ea8b9174f2a2ff37b172c1221a2",
+      "equals_head_blob": true
+    },
+    "outputs/xai-reference-label0-v1/aopc_deletion.csv": {
+      "sha256": "8bfe47939540072696add62732ff7b2bc4bfa30480851f59d9b11e63bc906a52",
+      "git_blob": "6dd9eecfe40be5730b12d1c0741794d93faa6723",
+      "equals_head_blob": true
+    },
+    "outputs/openox-v2/window_features.csv": {
+      "sha256": "d96d93989f1ffa85f72689a2e084c898dacf18d4eafce50712fb0dcf3ad1b3d6",
+      "git_blob": "7ace27b35ecebdc7ff4997e17ac57e814c275657",
+      "equals_head_blob": true
+    }
+  },
+  "checks": [
+    {
+      "check": "R1 TinyKAN: folds 1-5 present once",
+      "passed": true,
+      "detail": "folds [1, 2, 3, 4, 5]"
+    },
+    {
+      "check": "R1 TinyKAN: fold windows sum to the pooled n",
+      "passed": true,
+      "detail": "sum 48662, pooled 48662"
+    },
+    {
+      "check": "R1 Logistic regression: folds 1-5 present once",
+      "passed": true,
+      "detail": "folds [1, 2, 3, 4, 5]"
+    },
+    {
+      "check": "R1 Logistic regression: fold windows sum to the pooled n",
+      "passed": true,
+      "detail": "sum 48662, pooled 48662"
+    },
+    {
+      "check": "R1 TinyKAN: pooled AUC / recall / specificity = Table II",
+      "passed": true,
+      "detail": "got ('0.908', '89.3', '86.8'), paper ('0.908', '89.3', '86.8')"
+    },
+    {
+      "check": "R1 Logistic regression: pooled AUC / recall / specificity = Table II",
+      "passed": true,
+      "detail": "got ('0.863', '82.1', '87.0'), paper ('0.863', '82.1', '87.0')"
+    },
+    {
+      "check": "R1 TinyKAN fold AUC mean 0.911, s.d. (ddof=1) 0.019",
+      "passed": true,
+      "detail": "mean 0.911028, s.d. 0.018657"
+    },
+    {
+      "check": "R1 TinyKAN fold AUC mean and s.d. equal c_fold_summary.csv",
+      "passed": true,
+      "detail": "csv mean 0.91102791, s.d. 0.01865675"
+    },
+    {
+      "check": "R1 TinyKAN meets the gate in every fold (recall >= 80%, specificity >= 50%)",
+      "passed": true,
+      "detail": "min recall 87.43%, min specificity 82.64%"
+    },
+    {
+      "check": "R2 eight v2 bins, matching the drawn rows",
+      "passed": true,
+      "detail": "bins ['[-inf, -10)', '[-10, -5)', '[-5, -2)', '[-2, -1)', '[+1, +2)', '[+2, +5)', '[+5, +10)', '[+10, inf)']"
+    },
+    {
+      "check": "R2 [+10, inf): error type FP, errors / n = error_rate",
+      "passed": true,
+      "detail": "FP, 1 / 115 vs 0.0086956522"
+    },
+    {
+      "check": "R2 [+5, +10): error type FP, errors / n = error_rate",
+      "passed": true,
+      "detail": "FP, 1697 / 11967 vs 0.14180663"
+    },
+    {
+      "check": "R2 [+2, +5): error type FP, errors / n = error_rate",
+      "passed": true,
+      "detail": "FP, 659 / 6287 vs 0.10481947"
+    },
+    {
+      "check": "R2 [+1, +2): error type FP, errors / n = error_rate",
+      "passed": true,
+      "detail": "FP, 265 / 1498 vs 0.17690254"
+    },
+    {
+      "check": "R2 [-2, -1): error type FN, errors / n = error_rate",
+      "passed": true,
+      "detail": "FN, 430 / 1030 vs 0.41747573"
+    },
+    {
+      "check": "R2 [-5, -2): error type FN, errors / n = error_rate",
+      "passed": true,
+      "detail": "FN, 1179 / 6094 vs 0.19346899"
+    },
+    {
+      "check": "R2 [-10, -5): error type FN, errors / n = error_rate",
+      "passed": true,
+      "detail": "FN, 672 / 8684 vs 0.077383694"
+    },
+    {
+      "check": "R2 [-inf, -10): error type FN, errors / n = error_rate",
+      "passed": true,
+      "detail": "FN, 809 / 12987 vs 0.062293062"
+    },
+    {
+      "check": "R2 FN rate in [-2, -1) = 0.417 (paper)",
+      "passed": true,
+      "detail": "0.417476"
+    },
+    {
+      "check": "R2 FN rate in [-inf, -10) = 0.062 (paper)",
+      "passed": true,
+      "detail": "0.062293"
+    },
+    {
+      "check": "R2 sum of n over the eight bins = 48662 windows",
+      "passed": true,
+      "detail": "sum 48662, window table rows 48662"
+    },
+    {
+      "check": "R2 window label = (median_spo2 < 90) on every window",
+      "passed": true,
+      "detail": "28795 positives, 0 missing medians"
+    },
+    {
+      "check": "R3 windows equal for all / firmware_absolute",
+      "passed": true,
+      "detail": "48662 vs 48662"
+    },
+    {
+      "check": "R3 windows equal for all / random_mean",
+      "passed": true,
+      "detail": "48662 vs 48662"
+    },
+    {
+      "check": "R3 windows equal for all / signed_risk",
+      "passed": true,
+      "detail": "48662 vs 48662"
+    },
+    {
+      "check": "R3 windows equal for all / reverse_signed",
+      "passed": true,
+      "detail": "48662 vs 48662"
+    },
+    {
+      "check": "R3 windows equal for candidate_p_ge_0_50 / firmware_absolute",
+      "passed": true,
+      "detail": "28661 vs 28661"
+    },
+    {
+      "check": "R3 windows equal for candidate_p_ge_0_50 / random_mean",
+      "passed": true,
+      "detail": "28661 vs 28661"
+    },
+    {
+      "check": "R3 windows equal for candidate_p_ge_0_50 / signed_risk",
+      "passed": true,
+      "detail": "28661 vs 28661"
+    },
+    {
+      "check": "R3 windows equal for candidate_p_ge_0_50 / reverse_signed",
+      "passed": true,
+      "detail": "28661 vs 28661"
+    },
+    {
+      "check": "R3 windows equal for noncandidate_p_lt_0_50 / firmware_absolute",
+      "passed": true,
+      "detail": "20001 vs 20001"
+    },
+    {
+      "check": "R3 windows equal for noncandidate_p_lt_0_50 / random_mean",
+      "passed": true,
+      "detail": "20001 vs 20001"
+    },
+    {
+      "check": "R3 windows equal for noncandidate_p_lt_0_50 / signed_risk",
+      "passed": true,
+      "detail": "20001 vs 20001"
+    },
+    {
+      "check": "R3 windows equal for noncandidate_p_lt_0_50 / reverse_signed",
+      "passed": true,
+      "detail": "20001 vs 20001"
+    },
+    {
+      "check": "R3 windows equal for label_1 / firmware_absolute",
+      "passed": true,
+      "detail": "28795 vs 28795"
+    },
+    {
+      "check": "R3 windows equal for label_1 / random_mean",
+      "passed": true,
+      "detail": "28795 vs 28795"
+    },
+    {
+      "check": "R3 windows equal for label_1 / signed_risk",
+      "passed": true,
+      "detail": "28795 vs 28795"
+    },
+    {
+      "check": "R3 windows equal for label_1 / reverse_signed",
+      "passed": true,
+      "detail": "28795 vs 28795"
+    },
+    {
+      "check": "R3 windows equal for label_0 / firmware_absolute",
+      "passed": true,
+      "detail": "19867 vs 19867"
+    },
+    {
+      "check": "R3 windows equal for label_0 / random_mean",
+      "passed": true,
+      "detail": "19867 vs 19867"
+    },
+    {
+      "check": "R3 windows equal for label_0 / signed_risk",
+      "passed": true,
+      "detail": "19867 vs 19867"
+    },
+    {
+      "check": "R3 windows equal for label_0 / reverse_signed",
+      "passed": true,
+      "detail": "19867 vs 19867"
+    },
+    {
+      "check": "R3 label-0 file's training_mean rows equal d_aopc_v2_new_run.csv (to 1e-9)",
+      "passed": true,
+      "detail": "20 subset x ranking rows compared, max |difference| 0.000e+00"
+    },
+    {
+      "check": "R3 (a) candidate_p_ge_0_50: one n for both rankings",
+      "passed": true,
+      "detail": "n 28661"
+    },
+    {
+      "check": "R3 (a) noncandidate_p_lt_0_50: one n for both rankings",
+      "passed": true,
+      "detail": "n 20001"
+    },
+    {
+      "check": "R3 (a) all: one n for both rankings",
+      "passed": true,
+      "detail": "n 48662"
+    },
+    {
+      "check": "R3 (b) candidate_p_ge_0_50: one n for both rankings",
+      "passed": true,
+      "detail": "n 28661"
+    },
+    {
+      "check": "R3 (b) noncandidate_p_lt_0_50: one n for both rankings",
+      "passed": true,
+      "detail": "n 20001"
+    },
+    {
+      "check": "R3 (b) all: one n for both rankings",
+      "passed": true,
+      "detail": "n 48662"
+    },
+    {
+      "check": "R3 (a) candidate_p_ge_0_50: firmware / random = paper",
+      "passed": true,
+      "detail": "got ('-0.0085', '-0.0004'), paper ('-0.0085', '-0.0004')"
+    },
+    {
+      "check": "R3 (a) noncandidate_p_lt_0_50: firmware / random = paper",
+      "passed": true,
+      "detail": "got ('-0.7402', '-0.3917'), paper ('-0.7402', '-0.3917')"
+    },
+    {
+      "check": "R3 (a) all: firmware / random = paper",
+      "passed": true,
+      "detail": "got ('-0.3092', '-0.1612'), paper ('-0.3092', '-0.1612')"
+    },
+    {
+      "check": "R3 (b) candidate_p_ge_0_50: firmware / random = paper",
+      "passed": true,
+      "detail": "got ('0.775', '0.414'), paper ('0.775', '0.414')"
+    },
+    {
+      "check": "R3 (b) all: firmware / random = paper",
+      "passed": true,
+      "detail": "got ('0.469', '0.249'), paper ('0.469', '0.249')"
+    },
+    {
+      "check": "R3 subset n: 28661 + 20001 = 48662",
+      "passed": true,
+      "detail": "[28661, 20001, 48662]"
+    }
+  ],
+  "figures": {
+    "figR1_fold_spread": {
+      "size_in": [
+        3.263888888888889,
+        2.45
+      ],
+      "size_px": [
+        979,
+        735
+      ],
+      "dpi": 300,
+      "values": [
+        {
+          "figure": "R1",
+          "panel": "auc",
+          "label": "TinyKAN fold 1",
+          "value": 0.9067203,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "TinyKAN",
+            "fold": 1
+          },
+          "column": "auc"
+        },
+        {
+          "figure": "R1",
+          "panel": "auc",
+          "label": "TinyKAN fold 2",
+          "value": 0.90036192,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "TinyKAN",
+            "fold": 2
+          },
+          "column": "auc"
+        },
+        {
+          "figure": "R1",
+          "panel": "auc",
+          "label": "TinyKAN fold 3",
+          "value": 0.93954484,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "TinyKAN",
+            "fold": 3
+          },
+          "column": "auc"
+        },
+        {
+          "figure": "R1",
+          "panel": "auc",
+          "label": "TinyKAN fold 4",
+          "value": 0.91758012,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "TinyKAN",
+            "fold": 4
+          },
+          "column": "auc"
+        },
+        {
+          "figure": "R1",
+          "panel": "auc",
+          "label": "TinyKAN fold 5",
+          "value": 0.89093235,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "TinyKAN",
+            "fold": 5
+          },
+          "column": "auc"
+        },
+        {
+          "figure": "R1",
+          "panel": "auc",
+          "label": "TinyKAN pooled out-of-fold",
+          "value": 0.90752836,
+          "source": "outputs/analysis-lamaakal-style-v1/a_baselines.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "learner": "tinykan"
+          },
+          "column": "auc"
+        },
+        {
+          "figure": "R1",
+          "panel": "recall",
+          "label": "TinyKAN fold 1",
+          "value": 88.569919,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "TinyKAN",
+            "fold": 1
+          },
+          "column": "recall"
+        },
+        {
+          "figure": "R1",
+          "panel": "recall",
+          "label": "TinyKAN fold 2",
+          "value": 88.42415799999999,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "TinyKAN",
+            "fold": 2
+          },
+          "column": "recall"
+        },
+        {
+          "figure": "R1",
+          "panel": "recall",
+          "label": "TinyKAN fold 3",
+          "value": 92.025601,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "TinyKAN",
+            "fold": 3
+          },
+          "column": "recall"
+        },
+        {
+          "figure": "R1",
+          "panel": "recall",
+          "label": "TinyKAN fold 4",
+          "value": 89.853092,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "TinyKAN",
+            "fold": 4
+          },
+          "column": "recall"
+        },
+        {
+          "figure": "R1",
+          "panel": "recall",
+          "label": "TinyKAN fold 5",
+          "value": 87.43007,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "TinyKAN",
+            "fold": 5
+          },
+          "column": "recall"
+        },
+        {
+          "figure": "R1",
+          "panel": "recall",
+          "label": "TinyKAN pooled out-of-fold",
+          "value": 89.26897,
+          "source": "outputs/analysis-lamaakal-style-v1/a_baselines.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "learner": "tinykan"
+          },
+          "column": "recall"
+        },
+        {
+          "figure": "R1",
+          "panel": "specificity",
+          "label": "TinyKAN fold 1",
+          "value": 84.380389,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "TinyKAN",
+            "fold": 1
+          },
+          "column": "specificity"
+        },
+        {
+          "figure": "R1",
+          "panel": "specificity",
+          "label": "TinyKAN fold 2",
+          "value": 82.643592,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "TinyKAN",
+            "fold": 2
+          },
+          "column": "specificity"
+        },
+        {
+          "figure": "R1",
+          "panel": "specificity",
+          "label": "TinyKAN fold 3",
+          "value": 91.291139,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "TinyKAN",
+            "fold": 3
+          },
+          "column": "specificity"
+        },
+        {
+          "figure": "R1",
+          "panel": "specificity",
+          "label": "TinyKAN fold 4",
+          "value": 88.48625,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "TinyKAN",
+            "fold": 4
+          },
+          "column": "specificity"
+        },
+        {
+          "figure": "R1",
+          "panel": "specificity",
+          "label": "TinyKAN fold 5",
+          "value": 87.33668300000001,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "TinyKAN",
+            "fold": 5
+          },
+          "column": "specificity"
+        },
+        {
+          "figure": "R1",
+          "panel": "specificity",
+          "label": "TinyKAN pooled out-of-fold",
+          "value": 86.80223500000001,
+          "source": "outputs/analysis-lamaakal-style-v1/a_baselines.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "learner": "tinykan"
+          },
+          "column": "specificity"
+        },
+        {
+          "figure": "R1",
+          "panel": "auc",
+          "label": "Logistic regression fold 1",
+          "value": 0.85497589,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "LogReg",
+            "fold": 1
+          },
+          "column": "auc"
+        },
+        {
+          "figure": "R1",
+          "panel": "auc",
+          "label": "Logistic regression fold 2",
+          "value": 0.84585688,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "LogReg",
+            "fold": 2
+          },
+          "column": "auc"
+        },
+        {
+          "figure": "R1",
+          "panel": "auc",
+          "label": "Logistic regression fold 3",
+          "value": 0.91334691,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "LogReg",
+            "fold": 3
+          },
+          "column": "auc"
+        },
+        {
+          "figure": "R1",
+          "panel": "auc",
+          "label": "Logistic regression fold 4",
+          "value": 0.85403363,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "LogReg",
+            "fold": 4
+          },
+          "column": "auc"
+        },
+        {
+          "figure": "R1",
+          "panel": "auc",
+          "label": "Logistic regression fold 5",
+          "value": 0.84905678,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "LogReg",
+            "fold": 5
+          },
+          "column": "auc"
+        },
+        {
+          "figure": "R1",
+          "panel": "auc",
+          "label": "Logistic regression pooled out-of-fold",
+          "value": 0.86309226,
+          "source": "outputs/analysis-lamaakal-style-v1/a_baselines.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "learner": "logreg"
+          },
+          "column": "auc"
+        },
+        {
+          "figure": "R1",
+          "panel": "recall",
+          "label": "Logistic regression fold 1",
+          "value": 81.983093,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "LogReg",
+            "fold": 1
+          },
+          "column": "recall"
+        },
+        {
+          "figure": "R1",
+          "panel": "recall",
+          "label": "Logistic regression fold 2",
+          "value": 78.53175999999999,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "LogReg",
+            "fold": 2
+          },
+          "column": "recall"
+        },
+        {
+          "figure": "R1",
+          "panel": "recall",
+          "label": "Logistic regression fold 3",
+          "value": 83.670645,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "LogReg",
+            "fold": 3
+          },
+          "column": "recall"
+        },
+        {
+          "figure": "R1",
+          "panel": "recall",
+          "label": "Logistic regression fold 4",
+          "value": 82.439358,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "LogReg",
+            "fold": 4
+          },
+          "column": "recall"
+        },
+        {
+          "figure": "R1",
+          "panel": "recall",
+          "label": "Logistic regression fold 5",
+          "value": 84.090909,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "LogReg",
+            "fold": 5
+          },
+          "column": "recall"
+        },
+        {
+          "figure": "R1",
+          "panel": "recall",
+          "label": "Logistic regression pooled out-of-fold",
+          "value": 82.142733,
+          "source": "outputs/analysis-lamaakal-style-v1/a_baselines.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "learner": "logreg"
+          },
+          "column": "recall"
+        },
+        {
+          "figure": "R1",
+          "panel": "specificity",
+          "label": "Logistic regression fold 1",
+          "value": 85.045578,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "LogReg",
+            "fold": 1
+          },
+          "column": "specificity"
+        },
+        {
+          "figure": "R1",
+          "panel": "specificity",
+          "label": "Logistic regression fold 2",
+          "value": 87.38399799999999,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "LogReg",
+            "fold": 2
+          },
+          "column": "specificity"
+        },
+        {
+          "figure": "R1",
+          "panel": "specificity",
+          "label": "Logistic regression fold 3",
+          "value": 91.898734,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "LogReg",
+            "fold": 3
+          },
+          "column": "specificity"
+        },
+        {
+          "figure": "R1",
+          "panel": "specificity",
+          "label": "Logistic regression fold 4",
+          "value": 83.937291,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "LogReg",
+            "fold": 4
+          },
+          "column": "specificity"
+        },
+        {
+          "figure": "R1",
+          "panel": "specificity",
+          "label": "Logistic regression fold 5",
+          "value": 86.78392000000001,
+          "source": "outputs/analysis-lamaakal-style-v1/c_per_fold.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "model": "LogReg",
+            "fold": 5
+          },
+          "column": "specificity"
+        },
+        {
+          "figure": "R1",
+          "panel": "specificity",
+          "label": "Logistic regression pooled out-of-fold",
+          "value": 87.008607,
+          "source": "outputs/analysis-lamaakal-style-v1/a_baselines.csv",
+          "row": {
+            "version": "v2",
+            "grouping": "recording",
+            "learner": "logreg"
+          },
+          "column": "specificity"
+        }
+      ],
+      "logistic_regression_folds_below_80_recall": [
+        {
+          "fold": 2,
+          "recall_pct": 78.53
+        }
+      ]
+    },
+    "figR2_error_by_reference_distance": {
+      "size_in": [
+        3.263888888888889,
+        2.1
+      ],
+      "size_px": [
+        979,
+        630
+      ],
+      "dpi": 300,
+      "values": [
+        {
+          "figure": "R2",
+          "panel": "",
+          "label": "+10 or more: FP rate (%)",
+          "value": 0.8695652200000001,
+          "source": "outputs/analysis-lamaakal-style-v1/g_error_by_spo2_distance.csv",
+          "row": {
+            "version": "v2",
+            "distance_bin": "[+10, inf)"
+          },
+          "column": "error_rate"
+        },
+        {
+          "figure": "R2",
+          "panel": "",
+          "label": "+10 or more: n",
+          "value": 115.0,
+          "source": "outputs/analysis-lamaakal-style-v1/g_error_by_spo2_distance.csv",
+          "row": {
+            "version": "v2",
+            "distance_bin": "[+10, inf)"
+          },
+          "column": "n"
+        },
+        {
+          "figure": "R2",
+          "panel": "",
+          "label": "+5 to +10: FP rate (%)",
+          "value": 14.180663,
+          "source": "outputs/analysis-lamaakal-style-v1/g_error_by_spo2_distance.csv",
+          "row": {
+            "version": "v2",
+            "distance_bin": "[+5, +10)"
+          },
+          "column": "error_rate"
+        },
+        {
+          "figure": "R2",
+          "panel": "",
+          "label": "+5 to +10: n",
+          "value": 11967.0,
+          "source": "outputs/analysis-lamaakal-style-v1/g_error_by_spo2_distance.csv",
+          "row": {
+            "version": "v2",
+            "distance_bin": "[+5, +10)"
+          },
+          "column": "n"
+        },
+        {
+          "figure": "R2",
+          "panel": "",
+          "label": "+2 to +5: FP rate (%)",
+          "value": 10.481947,
+          "source": "outputs/analysis-lamaakal-style-v1/g_error_by_spo2_distance.csv",
+          "row": {
+            "version": "v2",
+            "distance_bin": "[+2, +5)"
+          },
+          "column": "error_rate"
+        },
+        {
+          "figure": "R2",
+          "panel": "",
+          "label": "+2 to +5: n",
+          "value": 6287.0,
+          "source": "outputs/analysis-lamaakal-style-v1/g_error_by_spo2_distance.csv",
+          "row": {
+            "version": "v2",
+            "distance_bin": "[+2, +5)"
+          },
+          "column": "n"
+        },
+        {
+          "figure": "R2",
+          "panel": "",
+          "label": "+1 to +2: FP rate (%)",
+          "value": 17.690254,
+          "source": "outputs/analysis-lamaakal-style-v1/g_error_by_spo2_distance.csv",
+          "row": {
+            "version": "v2",
+            "distance_bin": "[+1, +2)"
+          },
+          "column": "error_rate"
+        },
+        {
+          "figure": "R2",
+          "panel": "",
+          "label": "+1 to +2: n",
+          "value": 1498.0,
+          "source": "outputs/analysis-lamaakal-style-v1/g_error_by_spo2_distance.csv",
+          "row": {
+            "version": "v2",
+            "distance_bin": "[+1, +2)"
+          },
+          "column": "n"
+        },
+        {
+          "figure": "R2",
+          "panel": "",
+          "label": "−1 to −2: FN rate (%)",
+          "value": 41.747572999999996,
+          "source": "outputs/analysis-lamaakal-style-v1/g_error_by_spo2_distance.csv",
+          "row": {
+            "version": "v2",
+            "distance_bin": "[-2, -1)"
+          },
+          "column": "error_rate"
+        },
+        {
+          "figure": "R2",
+          "panel": "",
+          "label": "−1 to −2: n",
+          "value": 1030.0,
+          "source": "outputs/analysis-lamaakal-style-v1/g_error_by_spo2_distance.csv",
+          "row": {
+            "version": "v2",
+            "distance_bin": "[-2, -1)"
+          },
+          "column": "n"
+        },
+        {
+          "figure": "R2",
+          "panel": "",
+          "label": "−2 to −5: FN rate (%)",
+          "value": 19.346899,
+          "source": "outputs/analysis-lamaakal-style-v1/g_error_by_spo2_distance.csv",
+          "row": {
+            "version": "v2",
+            "distance_bin": "[-5, -2)"
+          },
+          "column": "error_rate"
+        },
+        {
+          "figure": "R2",
+          "panel": "",
+          "label": "−2 to −5: n",
+          "value": 6094.0,
+          "source": "outputs/analysis-lamaakal-style-v1/g_error_by_spo2_distance.csv",
+          "row": {
+            "version": "v2",
+            "distance_bin": "[-5, -2)"
+          },
+          "column": "n"
+        },
+        {
+          "figure": "R2",
+          "panel": "",
+          "label": "−5 to −10: FN rate (%)",
+          "value": 7.7383694,
+          "source": "outputs/analysis-lamaakal-style-v1/g_error_by_spo2_distance.csv",
+          "row": {
+            "version": "v2",
+            "distance_bin": "[-10, -5)"
+          },
+          "column": "error_rate"
+        },
+        {
+          "figure": "R2",
+          "panel": "",
+          "label": "−5 to −10: n",
+          "value": 8684.0,
+          "source": "outputs/analysis-lamaakal-style-v1/g_error_by_spo2_distance.csv",
+          "row": {
+            "version": "v2",
+            "distance_bin": "[-10, -5)"
+          },
+          "column": "n"
+        },
+        {
+          "figure": "R2",
+          "panel": "",
+          "label": "more than 10 below: FN rate (%)",
+          "value": 6.2293062,
+          "source": "outputs/analysis-lamaakal-style-v1/g_error_by_spo2_distance.csv",
+          "row": {
+            "version": "v2",
+            "distance_bin": "[-inf, -10)"
+          },
+          "column": "error_rate"
+        },
+        {
+          "figure": "R2",
+          "panel": "",
+          "label": "more than 10 below: n",
+          "value": 12987.0,
+          "source": "outputs/analysis-lamaakal-style-v1/g_error_by_spo2_distance.csv",
+          "row": {
+            "version": "v2",
+            "distance_bin": "[-inf, -10)"
+          },
+          "column": "n"
+        }
+      ],
+      "n_sum": 48662,
+      "n_expected": 48662,
+      "gap_at_cut": {
+        "band_counts": {
+          "[89, 91)": 0,
+          "[89, 91]": 0,
+          "[89, 90)": 0,
+          "[89, 90]": 0,
+          "[90, 91)": 0,
+          "[90, 91]": 0,
+          "[88, 92)": 2528,
+          "[88, 92]": 2528
+        },
+        "max_median_below_90": 88.999382,
+        "min_median_at_or_above_90": 91.00024,
+        "windows_in_excluded_band_[-1, +1)": 0
+      }
+    },
+    "figR3_deletion_aopc": {
+      "size_in": [
+        3.263888888888889,
+        2.3
+      ],
+      "size_px": [
+        979,
+        690
+      ],
+      "dpi": 300,
+      "values": [
+        {
+          "figure": "R3",
+          "panel": "a",
+          "label": "candidates (P ≥ 0.50): firmware_absolute",
+          "value": -0.0085217957,
+          "source": "outputs/analysis-lamaakal-style-v1/d_aopc_v2_new_run.csv",
+          "row": {
+            "version": "v2",
+            "subset": "candidate_p_ge_0_50",
+            "ranking": "firmware_absolute"
+          },
+          "column": "deletion_aopc_window_mean"
+        },
+        {
+          "figure": "R3",
+          "panel": "a",
+          "label": "candidates (P ≥ 0.50): random_mean",
+          "value": -0.0004243627,
+          "source": "outputs/analysis-lamaakal-style-v1/d_aopc_v2_new_run.csv",
+          "row": {
+            "version": "v2",
+            "subset": "candidate_p_ge_0_50",
+            "ranking": "random_mean"
+          },
+          "column": "deletion_aopc_window_mean"
+        },
+        {
+          "figure": "R3",
+          "panel": "a",
+          "label": "non-candidates: firmware_absolute",
+          "value": -0.74016218,
+          "source": "outputs/analysis-lamaakal-style-v1/d_aopc_v2_new_run.csv",
+          "row": {
+            "version": "v2",
+            "subset": "noncandidate_p_lt_0_50",
+            "ranking": "firmware_absolute"
+          },
+          "column": "deletion_aopc_window_mean"
+        },
+        {
+          "figure": "R3",
+          "panel": "a",
+          "label": "non-candidates: random_mean",
+          "value": -0.39169524,
+          "source": "outputs/analysis-lamaakal-style-v1/d_aopc_v2_new_run.csv",
+          "row": {
+            "version": "v2",
+            "subset": "noncandidate_p_lt_0_50",
+            "ranking": "random_mean"
+          },
+          "column": "deletion_aopc_window_mean"
+        },
+        {
+          "figure": "R3",
+          "panel": "a",
+          "label": "all windows: firmware_absolute",
+          "value": -0.30923979,
+          "source": "outputs/analysis-lamaakal-style-v1/d_aopc_v2_new_run.csv",
+          "row": {
+            "version": "v2",
+            "subset": "all",
+            "ranking": "firmware_absolute"
+          },
+          "column": "deletion_aopc_window_mean"
+        },
+        {
+          "figure": "R3",
+          "panel": "a",
+          "label": "all windows: random_mean",
+          "value": -0.16124407,
+          "source": "outputs/analysis-lamaakal-style-v1/d_aopc_v2_new_run.csv",
+          "row": {
+            "version": "v2",
+            "subset": "all",
+            "ranking": "random_mean"
+          },
+          "column": "deletion_aopc_window_mean"
+        },
+        {
+          "figure": "R3",
+          "panel": "b",
+          "label": "candidates (P ≥ 0.50): firmware_absolute",
+          "value": 0.77451865,
+          "source": "outputs/xai-reference-label0-v1/aopc_deletion.csv",
+          "row": {
+            "model": "v2",
+            "reference": "label0_fp32",
+            "subset": "candidate_p_ge_0_50",
+            "ranking": "firmware_absolute"
+          },
+          "column": "deletion_aopc_window_mean"
+        },
+        {
+          "figure": "R3",
+          "panel": "b",
+          "label": "candidates (P ≥ 0.50): random_mean",
+          "value": 0.41381835,
+          "source": "outputs/xai-reference-label0-v1/aopc_deletion.csv",
+          "row": {
+            "model": "v2",
+            "reference": "label0_fp32",
+            "subset": "candidate_p_ge_0_50",
+            "ranking": "random_mean"
+          },
+          "column": "deletion_aopc_window_mean"
+        },
+        {
+          "figure": "R3",
+          "panel": "b",
+          "label": "non-candidates: firmware_absolute",
+          "value": 0.031670874,
+          "source": "outputs/xai-reference-label0-v1/aopc_deletion.csv",
+          "row": {
+            "model": "v2",
+            "reference": "label0_fp32",
+            "subset": "noncandidate_p_lt_0_50",
+            "ranking": "firmware_absolute"
+          },
+          "column": "deletion_aopc_window_mean"
+        },
+        {
+          "figure": "R3",
+          "panel": "b",
+          "label": "non-candidates: random_mean",
+          "value": 0.013944877,
+          "source": "outputs/xai-reference-label0-v1/aopc_deletion.csv",
+          "row": {
+            "model": "v2",
+            "reference": "label0_fp32",
+            "subset": "noncandidate_p_lt_0_50",
+            "ranking": "random_mean"
+          },
+          "column": "deletion_aopc_window_mean"
+        },
+        {
+          "figure": "R3",
+          "panel": "b",
+          "label": "all windows: firmware_absolute",
+          "value": 0.4691942,
+          "source": "outputs/xai-reference-label0-v1/aopc_deletion.csv",
+          "row": {
+            "model": "v2",
+            "reference": "label0_fp32",
+            "subset": "all",
+            "ranking": "firmware_absolute"
+          },
+          "column": "deletion_aopc_window_mean"
+        },
+        {
+          "figure": "R3",
+          "panel": "b",
+          "label": "all windows: random_mean",
+          "value": 0.24946281,
+          "source": "outputs/xai-reference-label0-v1/aopc_deletion.csv",
+          "row": {
+            "model": "v2",
+            "reference": "label0_fp32",
+            "subset": "all",
+            "ranking": "random_mean"
+          },
+          "column": "deletion_aopc_window_mean"
+        }
+      ],
+      "training_mean_cross_check": {
+        "rows_compared": 20,
+        "max_abs_difference": 0.0,
+        "tolerance": 1e-09,
+        "column": "deletion_aopc_window_mean"
+      },
+      "panel_b_noncandidates": {
+        "firmware_absolute": 0.031670874,
+        "random_mean": 0.013944877
+      }
+    }
+  },
+  "outputs_sha256": {
+    "figR1_fold_spread.png": "1e52de3042288d6898123ce3f0548bc2444a87948c666c7e7749ec3f379e6a16",
+    "figR2_error_by_reference_distance.png": "a7fff9b66972b949722e2bea030852b5c40e915f5b5fb9fb218b8396b1eeeda2",
+    "figR3_deletion_aopc.png": "809c0e1d520b4f45083687a6bfb4e7157c887b06b3ae7d4313f411ac916b7b70"
+  },
+  "determinism": {
+    "directory": "<scratch>/figR_clean",
+    "earlier": {
+      "figR1_fold_spread.png": "1e52de3042288d6898123ce3f0548bc2444a87948c666c7e7749ec3f379e6a16",
+      "figR2_error_by_reference_distance.png": "a7fff9b66972b949722e2bea030852b5c40e915f5b5fb9fb218b8396b1eeeda2",
+      "figR3_deletion_aopc.png": "809c0e1d520b4f45083687a6bfb4e7157c887b06b3ae7d4313f411ac916b7b70"
+    },
+    "identical": true
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "script": "scripts/make_ieee_paper_fig1_tinykan.py",
+  "input_sha256": {
+    "outputs/analysis-lamaakal-style-v1/d_global_attribution.csv": "ff1dbbbe586b0873310e7a9ae4b2314b64d8983f243c55002dbd88eb492cb180"
+  },
+  "print_width_in": 3.263888888888889,
+  "height_in": 1.7,
+  "min_font_pt": 8,
+  "dpi": 300,
+  "fig1_global_top1_share": {
+    "features": [
+      "ratio_of_ratios",
+      "derivative_std",
+      "kurtosis",
+      "ir_perfusion_index",
+      "maximum",
+      "rms"
+    ],
+    "rest_max_top1_share": 0.017415815,
+    "top1_share_y1": [
+      0.50797013,
+      0.14756034,
+      0.13696822,
+      0.082305956,
+      0.061955201,
+      0.028372981
+    ],
+    "top1_share_y0": [
+      0.90411235,
+      0.017315146,
+      0.028489455,
+      0.013942719,
+      0.0049328031,
+      0.0040771128
+    ]
+  },
+  "outputs_sha256": {
+    "fig1_global_top1_share.png": "9c5c9428a911246c6596993afa4b0bfd4ed8e152b8b3ba2d828f229c74050a38"
+  }
+}

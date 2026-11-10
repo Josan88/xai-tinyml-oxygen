@@ -1,0 +1,102 @@
+{
+  "script": "scripts/make_ieee_paper_figures.py",
+  "inputs_sha256": {
+    "outputs/analysis-lamaakal-style-v1/d_global_attribution.csv": "ff1dbbbe586b0873310e7a9ae4b2314b64d8983f243c55002dbd88eb492cb180",
+    "outputs/analysis-lamaakal-style-v1/d_case_studies.csv": "683748eb34299eb945b534e9d9aa07a7e5cbe8c868e5f1f43d0468cecc3d62a7"
+  },
+  "print_width_in": 3.263888888888889,
+  "min_font_pt": 8,
+  "dpi": 300,
+  "fig1_global_top1_share": {
+    "v1": {
+      "features": [
+        "kurtosis",
+        "bandpower_ratio_0_5_2_to_2_5",
+        "dominant_frequency_hz",
+        "std",
+        "maximum",
+        "minimum"
+      ],
+      "rest_max_top1_share": 0.0045101595,
+      "top1_share_y1": [
+        0.55606056,
+        0.28028643,
+        0.085439623,
+        0.049112252,
+        0.017722264,
+        0.0038256548
+      ],
+      "top1_share_y0": [
+        0.54410192,
+        0.22574046,
+        0.12735388,
+        0.06648998,
+        0.019528526,
+        0.0051146138
+      ]
+    },
+    "v2": {
+      "features": [
+        "ratio_of_ratios",
+        "derivative_std",
+        "kurtosis",
+        "ir_perfusion_index",
+        "maximum",
+        "rms"
+      ],
+      "rest_max_top1_share": 0.017415815,
+      "top1_share_y1": [
+        0.50797013,
+        0.14756034,
+        0.13696822,
+        0.082305956,
+        0.061955201,
+        0.028372981
+      ],
+      "top1_share_y0": [
+        0.90411235,
+        0.017315146,
+        0.028489455,
+        0.013942719,
+        0.0049328031,
+        0.0040771128
+      ]
+    }
+  },
+  "fig2_v2_case_studies": {
+    "TP": {
+      "probability": 0.89001712,
+      "y_true": 1,
+      "nonzero_deltas": 1,
+      "payload": [
+        "ratio_of_ratios",
+        "mean",
+        "std"
+      ],
+      "payload_delta": [
+        -0.0081773877,
+        0.0,
+        0.0
+      ]
+    },
+    "FP": {
+      "probability": 0.89001712,
+      "y_true": 0,
+      "nonzero_deltas": 1,
+      "payload": [
+        "ratio_of_ratios",
+        "mean",
+        "std"
+      ],
+      "payload_delta": [
+        -0.0018600928,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "outputs_sha256": {
+    "fig1_global_top1_share.png": "953dc28f09e8176b6661f33e7e6bfe0ced4bb4e4fafdbbef0d63d7a8070fb5db",
+    "fig2_v2_case_studies.png": "7d16c2f472ea865ec43bd5a004597459307090c1ecf52990f3d0dbb5436f2efe"
+  }
+}

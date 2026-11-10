@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TinyKAN oxygen-risk prototype</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dash" data-mode="replay">
+  <a class="skip" href="#main">Skip to dashboard</a>
+
+  <header class="bar">
+    <div class="brand">
+      <h1>TinyKAN <span>oxygen-risk prototype</span></h1>
+      <p class="disclaimer">Prototype. Not a diagnosis. The score is risk, not SpO2.</p>
+    </div>
+    <div class="link">
+      <div class="link-status" role="status" aria-live="polite">
+        <span class="dot" id="statusDot" aria-hidden="true"></span>
+        <span id="statusText">Disconnected</span>
+      </div>
+      <button class="primary" id="connectBtn" type="button">Connect</button>
+      <p class="not-supported" id="notSupported" hidden>Live needs Chrome or Edge on localhost.</p>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- How to read, three short steps. Which set shows depends on the mode. -->
+    <ol class="howto howto-replay" aria-label="How to read this page">
+      <li><b>No sensor connected.</b> Showing 20 saved OpenOximetry windows; pick one on the track. Press Connect for live.</li>
+      <li><b>0.50 is the flag line.</b> At or above it, the model flags the window.</li>
+      <li><b>Orange raises the score, blue lowers it.</b></li>
+    </ol>
+    <ol class="howto howto-live" aria-label="How to read this page">
+      <li><b>Keep still.</b> First result after about 15 s, then every 5 s.</li>
+      <li><b>Two in a row is the alert.</b></li>
+      <li><b>The score is not an oxygen reading.</b></li>
+    </ol>
+
+    <!-- Recorded OpenOximetry windows. No sensor data exists for these rows. -->
+    <section class="view" id="replayView" aria-label="Recorded windows">
+      <div class="face replay-face">
+        <div class="cell c-score">
+          <div class="cell-head">
+            <h2>Score</h2>
+            <span class="sel-id" id="selId">—</span>
+            <div class="stepper">
+              <button type="button" id="prevBtn" aria-label="Previous window">&#8249;</button>
+              <button type="button" id="nextBtn" aria-label="Next window">&#8250;</button>
+            </div>
+          </div>
+          <p class="src">Saved OpenOximetry window, not the live finger</p>
+          <div class="readout" id="replayScore">
+            <div class="readout-row">
+              <span class="readout-num" data-role="num">—</span>
+              <span class="readout-rel" data-role="rel"></span>
+            </div>
+            <div class="meter" data-role="gauge"></div>
+            <div class="zones" aria-hidden="true"><span>No flag</span><span>Flag</span></div>
+          </div>
+        </div>
+
+        <!-- What this result means: the results guide, current band lit. -->
+        <div class="cell c-guide" id="replayGuide">
+          <div class="cell-head">
+            <h2>What this result means</h2>
+            <span class="tag">Saved recording</span>
+          </div>
+          <div class="guide" data-role="card" data-level="off">
+            <div class="guide-head">
+              <span class="guide-icon" aria-hidden="true"></span>
+              <div class="guide-title" data-role="title">—</div>
+              <div class="guide-risk"><span>Risk</span> <b data-role="risk">—</b></div>
+            </div>
+            <dl class="guide-rows">
+              <div><dt>What it means</dt><dd data-role="meaning"></dd></div>
+              <div><dt>Suggested action</dt><dd data-role="action"></dd></div>
+              <div class="guide-clue"><dt>This window</dt><dd data-role="clue"></dd></div>
+            </dl>
+          </div>
+          <div class="guide-key">
+            <span class="label">All results</span>
+            <span class="meta">only green and yellow occur in saved windows</span>
+          </div>
+          <ol class="guide-legend" data-role="legend" aria-label="All results. The current one is marked."></ol>
+        </div>
+
+        <div class="cell c-strip">
+          <div class="cell-head">
+            <h2>Recorded windows</h2>
+            <span class="meta" id="windowCount"></span>
+            <div class="seg" role="group" aria-label="Order">
+              <button type="button" id="orderFile" aria-pressed="true">File order</button>
+              <button type="button" id="orderScore" aria-pressed="false">By score</button>
+            </div>
+          </div>
+          <div class="strip-wrap" id="stripWrap">
+            <div class="strip-axis" id="stripAxis" aria-hidden="true"></div>
+            <div class="strip" id="windowList" role="listbox" tabindex="0" aria-label="Firmware score per window against 0.50. Arrow keys select."></div>
+            <div class="strip-zones" aria-hidden="true"><span>Flag</span><span>No flag</span></div>
+          </div>
+        </div>
+
+        <div class="cell c-why">
+          <div class="cell-head"><h2>Why this score</h2></div>
+          <div class="drivers" id="replayDrivers" role="list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Bluetooth from OxygenRiskDemo. -->
+    <section class="view" id="liveView" aria-label="Live" hidden>
+      <div class="face live-face">
+        <!-- 1. Verdict, score, Candidate / Confirmed. -->
+        <div class="cell c-score">
+          <div class="cell-head">
+            <h2>Score</h2>
+            <span class="tag live-tag">Live</span>
+            <span class="tag held" id="heldTag" hidden>last window</span>
+          </div>
+          <div class="verdict" id="verdict" data-level="off" role="status" aria-live="polite">
+            <span class="verdict-icon" aria-hidden="true"></span>
+            <div class="verdict-text">
+              <div class="verdict-title" id="verdictTitle">—</div>
+              <div class="verdict-detail" id="verdictDetail"></div>
+            </div>
+            <div class="warm" id="warm" hidden><span id="warmBar"></span></div>
+          </div>
+          <div class="readout" id="liveScore">
+            <div class="readout-row">
+              <span class="readout-num" data-role="num">—</span>
+              <span class="readout-rel" data-role="rel"></span>
+            </div>
+            <div class="meter" data-role="gauge"></div>
+            <div class="zones" aria-hidden="true"><span>No flag</span><span>Flag</span></div>
+          </div>
+          <div class="lamps">
+            <div class="lamp" id="candidateTile">
+              <div class="label">Candidate <span>≥ 0.50</span></div>
+              <div class="lamp-value" id="candidateValue">—</div>
+              <div class="hint">This window over the line?</div>
+            </div>
+            <div class="lamp" id="confirmedTile">
+              <div class="label">Confirmed <span>N = 2</span></div>
+              <div class="lamp-value" id="confirmedValue">—</div>
+              <div class="hint">Two windows in a row?</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- What this result means: the results guide, current band lit. -->
+        <div class="cell c-guide" id="liveGuide">
+          <div class="cell-head"><h2>What this result means</h2></div>
+          <div class="guide" data-role="card" data-level="off" role="status" aria-live="polite">
+            <div class="guide-head">
+              <span class="guide-icon" aria-hidden="true"></span>
+              <div class="guide-title" data-role="title">—</div>
+              <div class="guide-risk"><span>Risk</span> <b data-role="risk">—</b></div>
+            </div>
+            <dl class="guide-rows">
+              <div><dt>What it means</dt><dd data-role="meaning"></dd></div>
+              <div><dt>Suggested action</dt><dd data-role="action"></dd></div>
+              <div class="guide-clue"><dt>Right now</dt><dd data-role="clue"></dd></div>
+            </dl>
+          </div>
+          <div class="guide-key">
+            <span class="label">All results</span>
+            <span class="meta">the current one is marked</span>
+          </div>
+          <ol class="guide-legend" data-role="legend" aria-label="All results. The current one is marked."></ol>
+        </div>
+
+        <!-- 2. Sensor: signal, SpO2 est, HR, model sat. est (newer images), infrared counts. -->
+        <div class="cell c-sensor">
+          <div class="cell-head"><h2>Sensor</h2></div>
+          <div class="readings">
+            <div class="reading" id="signalTile">
+              <div class="label">Signal</div>
+              <div class="reading-value" id="signalValue">—</div>
+              <div class="hint">Finger placement</div>
+            </div>
+            <div class="reading" id="spo2Tile">
+              <div class="label">SpO2 est</div>
+              <div class="reading-value" id="spo2Value">—</div>
+              <div class="hint">Red/IR estimate · uncalibrated · not the model</div>
+            </div>
+            <div class="reading" id="hrTile">
+              <div class="label">HR</div>
+              <div class="reading-value" id="hrValue">—</div>
+              <div class="hint">Beats per minute</div>
+            </div>
+            <!-- Field 10, newer images only. Label and note from dashboard_core.js. -->
+            <div class="reading" id="satTile" hidden>
+              <div class="label" id="satLabel"></div>
+              <div class="reading-value" id="satValue">—</div>
+              <div class="hint" id="satNote"></div>
+            </div>
+          </div>
+          <div class="trace">
+            <div class="trace-head">
+              <span class="label">Infrared counts</span>
+              <span class="trace-note">moves when the finger moves</span>
+              <span class="trace-now" id="irNow">—</span>
+            </div>
+            <canvas id="irTrace" role="img" aria-label="Infrared counts"></canvas>
+          </div>
+        </div>
+
+        <!-- 3. Why this score, then the recent windows. -->
+        <div class="cell c-why">
+          <div class="cell-head"><h2>Why this score</h2><span class="meta" id="xaiRefNote" hidden></span></div>
+          <div class="drivers" id="liveDrivers" role="list"></div>
+
+          <div class="cell-head sub">
+            <h2>Recent windows</h2>
+            <span class="meta">one row per result</span>
+          </div>
+          <table class="recent">
+            <thead>
+              <tr><th scope="col">Time</th><th scope="col" class="c-track"><span class="sr">Score vs 0.50</span></th><th scope="col">Score</th><th scope="col">≥ 0.50</th><th scope="col">Alert</th><th scope="col">Main clue</th></tr>
+            </thead>
+            <tbody id="recentBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <details class="sentence">
+        <summary>Text summary</summary>
+        <p id="liveSentence"></p>
+      </details>
+    </section>
+  </main>
+
+  <script src="dashboard_core.js"></script>
+  <script src="dashboard_view.js"></script>
+  <script src="replay_windows.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+{
+  "outer_size_mm": [
+    107.0,
+    90.0,
+    40.4
+  ],
+  "finger_clear_size_mm": [
+    51.7,
+    25.4,
+    22.0
+  ],
+  "breadboard_origin_mm": [
+    11.0,
+    31.0,
+    2.4
+  ],
+  "breadboard_allowed_mm": [
+    85.0,
+    56.0
+  ],
+  "body_height_mm": 38,
+  "status": "Geometry checked only; all hardware, cable and finger fits remain unverified.",
+  "base": {
+    "watertight": true,
+    "volume_cm3": 66.7,
+    "size_mm": [
+      107.0,
+      90.0,
+      38.0
+    ],
+    "triangles": 1954
+  },
+  "lid": {
+    "watertight": true,
+    "volume_cm3": 28.98,
+    "size_mm": [
+      107.0,
+      90.0,
+      28.4
+    ],
+    "triangles": 936
+  },
+  "finger-deck": {
+    "watertight": true,
+    "volume_cm3": 2.58,
+    "size_mm": [
+      56.4,
+      25.4,
+      2.0
+    ],
+    "triangles": 232
+  },
+  "finger-fit-sample": {
+    "watertight": true,
+    "volume_cm3": 16.78,
+    "size_mm": [
+      59.0,
+      30.0,
+      38.0
+    ],
+    "triangles": 214
+  },
+  "finger-fit-roof": {
+    "watertight": true,
+    "volume_cm3": 10.2,
+    "size_mm": [
+      59.0,
+      30.0,
+      28.4
+    ],
+    "triangles": 80
+  },
+  "assembly_interference_check": "passed for printed parts, provisional breadboard/sensor volumes, clear finger pocket and USB plug access"
+}

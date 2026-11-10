@@ -1,0 +1,3 @@
+# ieee-paper-figures-tinykan
+
+One-column (235 pt) Fig. 1 for the IEEE A4 draft: the share of windows in which each feature is top-ranked by |Δ|, by class, for the reported TinyKAN (repo v2) only. Drawn by `scripts/make_ieee_paper_fig1_tinykan.py` from `outputs/analysis-lamaakal-style-v1/d_global_attribution.csv`; nothing is recomputed. Explainer: mean-perturbation (training-mean replacement), in-sample on the shipped header. It replaces the two-panel Fig. 1 in `outputs/ieee-paper-figures-named` after the 6 Nov 2026 decision to remove the Baseline from the paper (ADR-0006). `manifest.json` records the input hash and the plotted values.

@@ -1,0 +1,14 @@
+{
+  "description": "Nine deterministic synthetic PPG windows; each CSV row is 500 FP32 samples at 50 Hz. No patient data or live board captures.",
+  "cases": [
+    "synthetic_dc0_hz1.2",
+    "synthetic_dc0_hz2.2",
+    "synthetic_dc0_hz3",
+    "synthetic_dc2000_hz1.2",
+    "synthetic_dc2000_hz2.2",
+    "synthetic_dc2000_hz3",
+    "synthetic_dc100000_hz1.2",
+    "synthetic_dc100000_hz2.2",
+    "synthetic_dc100000_hz3"
+  ]
+}
