@@ -39,7 +39,6 @@ import json
 import math
 from pathlib import Path
 import sys
-import time
 
 import numpy as np
 import pandas as pd
@@ -49,7 +48,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import check_v2_host_parity as host  # noqa: E402
 import parity_criteria_v2 as criteria  # noqa: E402
 import v2_deployed_reference as ref  # noqa: E402
-from replay_board_parity import encode, decode  # noqa: E402
+from replay_board_parity import decode  # noqa: E402
+from board_serial import block_command, receive, receive_after, write_command  # noqa: E402,F401
 from record_v2_upload_receipt import archived_image, archive_key  # noqa: E402
 
 IDENTITY = "CONTEXT_PARITY_V2 WINDOW=500 CONTEXT=250 STRIDE=250 N=2 THRESHOLD=0.50 INPUTS=16 PAIRS=IR,RED"
@@ -276,32 +276,10 @@ def parse_all_deltas(line, window_index):
     return values
 
 
-def write_command(connection, command):
-    data = command.encode("ascii")
-    for offset in range(0, len(data), 64):
-        piece = data[offset:offset + 64]
-        if connection.write(piece) != len(piece):
-            raise RuntimeError("Short USB write")
-        connection.flush()
-        time.sleep(.01)
 
 
-def receive(connection, timeout=15):
-    deadline = time.monotonic() + timeout
-    while time.monotonic() < deadline:
-        line = connection.readline().decode("ascii").strip()
-        if line:
-            return line
-    raise RuntimeError("Diagnostic response timed out")
 
 
-def block_command(ir, red):
-    if len(ir) != 250 or len(red) != 250:
-        raise ValueError("Block must contain exactly 250 IR/red pairs")
-    words = []
-    for a, b in zip(ir, red):
-        words += [encode(float(a)), encode(float(b))]
-    return "B " + " ".join(words) + "\n"
 
 
 def judge(board, deltas, cpp_row, python, index):
@@ -353,9 +331,6 @@ def replay_stream(connection, ir, red, cpp_rows, python):
     return results
 
 
-def receive_after(connection, command):
-    write_command(connection, command)
-    return receive(connection)
 
 
 def protocol_self_checks(connection):

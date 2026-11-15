@@ -2,6 +2,7 @@
 // Matches PyTorch / NumPy implementation of KANBinaryClassifier
 
 #pragma once
+#include "build_config.h"  // flag rules for every image; preprocessor checks only
 
 #ifdef ARDUINO
 #include <Arduino.h>

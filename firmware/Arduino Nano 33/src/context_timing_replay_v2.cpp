@@ -109,7 +109,14 @@ static void finish_line() {
     } else if (!timing_ready) {
         Serial.println("ERR timing_unavailable");
     } else if (command == 'H') {
-        Serial.println("TIMING_REPLAY_V2 WINDOW=500 CONTEXT=250 STRIDE=250 N=2 THRESHOLD=0.50 CLOCK_HZ=64000000 GPIO=D2 ATTR16=0 INPUTS=16 PAIRS=IR,RED");
+        Serial.println("TIMING_REPLAY_V2 WINDOW=500 CONTEXT=250 STRIDE=250 N=2 THRESHOLD=0.50 CLOCK_HZ=64000000 GPIO=D2 ATTR16=0 INPUTS=16 PAIRS=IR,RED"
+#ifdef OXY_MODEL_EKAN
+                       " MODEL=EKAN16"
+#endif
+#ifdef EKAN_XAI_REF_LABEL0
+                       " XAI_REF=LABEL0"
+#endif
+                       );
     } else if (command == 'R') {
         pipeline.reset();
         Serial.println("RESET 0");

@@ -38,7 +38,10 @@
 #include "rtx_os.h"
 #include "platform/mbed_stats.h"
 
-#if defined(OXY_MODEL_V2) && defined(PEAK_RAM_SAMPLER)
+#if defined(OXY_MODEL_EKAN) && defined(PEAK_RAM_SAMPLER)
+#define PR_IMAGE "nano33ble_ekan_f1a_peakram_sampler"
+#define PR_MODEL "ekan16"
+#elif defined(OXY_MODEL_V2) && defined(PEAK_RAM_SAMPLER)
 #define PR_IMAGE "nano33ble_v2_f1a_peakram_sampler"
 #define PR_MODEL "v2"
 #elif defined(OXY_MODEL_V2)

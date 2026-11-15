@@ -69,6 +69,21 @@ static_assert(KAN_INPUT_DIM == NUM_FEATURES + 2, "v2 model takes 14 IR features 
 static_assert(KAN_INPUT_DIM == NUM_FEATURES, "v1 model takes the 14 IR features");
 #endif
 
+// OXY_MODEL_EKAN (docs/edge-kan-operating-point-preregistration.md) replaces the scorer of the
+// v2 pipeline with the edge KAN (include/edge_kan_inference.h, ekan16): same 16 inputs, same
+// window, filter, features, 0.50 threshold, N = 2 debounce and training-mean reference. Only
+// evaluate_kan_and_xai changes. Requires OXY_MODEL_V2; without OXY_MODEL_EKAN nothing here is compiled.
+#ifdef OXY_MODEL_EKAN
+#ifndef OXY_MODEL_V2
+#error "OXY_MODEL_EKAN requires OXY_MODEL_V2 (the 16-input paired pipeline)"
+#endif
+#ifdef OXY_XAI_REF_LABEL0
+#error "OXY_MODEL_EKAN uses the training-mean reference only"
+#endif
+#include "edge_kan_inference.h"
+static_assert(EKAN_INPUT_DIM == KAN_INPUT_DIM, "edge KAN and v2 pipeline input counts differ");
+#endif
+
 // Individual feature attribution score from Mean-Perturbation XAI
 struct FeatureAttribution {
     uint8_t feature_index;    // Feature index (0..KAN_INPUT_DIM-1)
@@ -498,6 +513,18 @@ private:
 
     // One baseline pass plus one Mean-Perturbation pass per model input.
     float evaluate_kan_and_xai(const float* features, FeatureAttribution top_3_out[3]) {
+#ifdef OXY_MODEL_EKAN
+        // Edge KAN: P and the 16 mean-perturbation deltas (incremental), top 3 by |delta|,
+        // ties by input order (the same stable order as the bubble sort below).
+        EkanXaiAttribution edge_top[3];
+        const float edge_prob = ekan_predict_with_xai(features, edge_top, nullptr);
+        for (int i = 0; i < 3; ++i) {
+            top_3_out[i].feature_index = static_cast<uint8_t>(edge_top[i].feature_index);
+            top_3_out[i].importance_delta = edge_top[i].attribution_score;
+            top_3_out[i].feature_name = edge_top[i].feature_name;
+        }
+        return edge_prob;
+#else
         float scaled[KAN_INPUT_DIM];
         kan_standardize(features, scaled);
 
@@ -535,6 +562,7 @@ private:
         }
 
         return baseline_prob;
+#endif
     }
 
     RiskDecision evaluate_window() {

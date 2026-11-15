@@ -35,7 +35,13 @@ P5_ARCHIVES = {f"outputs/firmware-p5/{env}": env for env in
                ("nano33ble_p5_f1a", "nano33ble_p5_context_parity", "nano33ble_p5_context_timing")}
 # SpO2 est from the Maxim reference algorithm (ADR-0010, docs/spo2-maxim-runbook.md). Not the paper's image.
 SPO2_ARCHIVES = {"outputs/firmware-v2-f1a-spo2maxim": "nano33ble_v2_f1a_spo2"}
-ARCHIVES = {**R2_ARCHIVES, **REF0_ARCHIVES, **P5_ARCHIVES, **SPO2_ARCHIVES}
+# Edge-KAN board diagnostics (docs/edge-kan-board-preregistration.md, 12 Nov 2026). Never shipped.
+EKAN_ARCHIVES = {f"outputs/firmware-ekan/{env}": env for env in
+                 ("nano33ble_ekan_context_parity", "nano33ble_ekan_context_timing", "nano33ble_ekan_f1a",
+                  "nano33ble_ekan_pipeline_timing", "nano33ble_ekan_looptiming3", "nano33ble_ekan_f1a_peakram_sampler")}
+EKAN_REF0_ARCHIVES = {f"outputs/firmware-ekan-ref0/{env}": env for env in   # docs/edge-kan-label0-board-preregistration.md
+                      ("nano33ble_ekan_context_parity_ref0", "nano33ble_ekan_pipeline_timing_ref0", "nano33ble_ekan_f1a_ref0")}
+ARCHIVES = {**R2_ARCHIVES, **REF0_ARCHIVES, **P5_ARCHIVES, **SPO2_ARCHIVES, **EKAN_ARCHIVES, **EKAN_REF0_ARCHIVES}
 
 
 def sha256(path):

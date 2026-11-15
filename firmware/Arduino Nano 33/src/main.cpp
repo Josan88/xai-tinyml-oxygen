@@ -20,6 +20,12 @@
 #include "MAX30105.h"
 #include <ArduinoBLE.h>
 #include "oxygen_risk_pipeline.h"
+#ifdef EKAN_XAI_REF_LABEL0
+// Edge-KAN label-0-reference image: named at boot and once per serial connection. The BLE packet
+// is unchanged (docs/edge-kan-label0-board-preregistration.md).
+static const char EKAN_XAI_REF_BANNER[] =
+    "XAI_REF=LABEL0: edge KAN Mean-Perturbation reference is the label-0 median of each standardized input, not the training mean";
+#endif
 #ifdef OXY_SPO2_MAXIM
 #if defined(OXY_MODEL_P5) || defined(OXY_XAI_REF_LABEL0)
 #error "OXY_SPO2_MAXIM is for the v2 f1a image only (ADR-0010); the P5 and ref0 packets keep the demo formula"
@@ -654,7 +660,12 @@ void setup()
   if (DEMO_LOW_OXYGEN_MODE) {
     Serial.println("NOTE: DEMO_LOW_OXYGEN_MODE is ON (forces low-oxygen output for presentation)");
   }
-#ifdef OXY_MODEL_V2
+#if defined(OXY_MODEL_EKAN)
+  Serial.println("Model: Edge KAN ekan16 (16 inputs: 14 IR + ratio_of_ratios + ir_perfusion_index; spline on every edge)");
+#ifdef EKAN_XAI_REF_LABEL0
+  Serial.println(EKAN_XAI_REF_BANNER);
+#endif
+#elif defined(OXY_MODEL_V2)
   Serial.println("Model: TinyKAN v2 (16 inputs: 14 IR + ratio_of_ratios + ir_perfusion_index; ADR-0006)");
 #endif
 #ifdef OXY_MODEL_P5
@@ -739,6 +750,13 @@ void loop()
 #endif
   if (serialConnected && !xaiRefAnnounced) Serial.println(XAI_REF_BANNER);
   xaiRefAnnounced = serialConnected;
+#endif
+#ifdef EKAN_XAI_REF_LABEL0
+  // As above, for the edge KAN's label-0 reference (docs/edge-kan-label0-board-preregistration.md).
+  static bool ekanRefAnnounced = false;
+  const bool ekanSerialConnected = Serial.dtr();
+  if (ekanSerialConnected && !ekanRefAnnounced) Serial.println(EKAN_XAI_REF_BANNER);
+  ekanRefAnnounced = ekanSerialConnected;
 #endif
   // Check for BLE central connection
   BLEDevice central = BLE.central();

@@ -52,7 +52,9 @@ PAPER_WORDING = ("whole-device RAM high-water on the probe image, no finger, for
 
 # Sampler images (--sampler). Constants pre-registered 30 Oct 2026 before any sampler build or
 # run (docs/peak-ram-runbook.md, "Sampler run ... validity checks").
-SAMPLER_IMAGES = ("nano33ble_peakram_sampler", "nano33ble_v2_f1a_peakram_sampler")
+SAMPLER_IMAGES = ("nano33ble_peakram_sampler", "nano33ble_v2_f1a_peakram_sampler",
+                  # Edge KAN (12 Nov 2026): the v2 sampler image with -DOXY_MODEL_EKAN; same checks and constants.
+                  "nano33ble_ekan_f1a_peakram_sampler")
 SAMPLER_HZ = 4000
 MIN_FINGER_FRACTION = 0.95        # live gate during the capture
 MIN_DECISIONS_DURING = 25         # decisions during the capture

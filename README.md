@@ -2,7 +2,9 @@
 
 An academic research repository for the final-year capstone project: **Design and Implementation of a Lightweight Explainable TinyML Framework for Real-Time Oxygen Monitoring on Edge Devices** (Swinburne University of Technology Sarawak Campus, EAT40005/EAT40006).
 
-This project investigates whether photoplethysmography (PPG) waveforms can support transparent, on-device low-oxygen-risk detection. We deploy the shipped TinyKAN onto an edge microcontroller and compute a local explanation on the device. Real-time here means the loop keeps up with the 5 s stride on synthetic input.
+This project investigates whether photoplethysmography (PPG) waveforms can support transparent, on-device low-oxygen-risk detection. We deploy a Kolmogorov–Arnold network onto an edge microcontroller and compute a local explanation on the device. Real-time here means the loop keeps up with the 5 s stride on synthetic input.
+
+> **Current status (12 Nov 2026).** The paper reports the **edge KAN** (`ekan16`: 16 → 12 → 1, a cubic B-spline on every edge, 1632 parameters, firmware flag `-DOXY_MODEL_EKAN`); see [ADR-0011](docs/adr/0011-edge-kan-reported-model.md) and [docs/edge-kan-results.md](docs/edge-kan-results.md). The header-aligned TinyKAN (v2, 321 parameters) is the comparator, and the board's live image still uses it (ADR-0010). Sections below that describe the 14-feature, 297-parameter TinyKAN (v1) are history, kept for the earlier milestones. Since then (13–15 Nov 2026), an additive Shapley ranking was put through the same deletion test ([pre-registration](docs/edge-kan-additive-deletion-preregistration.md)), and replay images with the label-0 reference reproduced the host on all 1243 board decisions ([results](docs/edge-kan-label0-board-results.md)).
 
 
 > **Public release (Nov 2026).** This is a curated snapshot of the research repository: code, firmware, tests, docs and paper figures. It is **not a medical device** and makes no clinical claim.
@@ -19,11 +21,11 @@ This project investigates whether photoplethysmography (PPG) waveforms can suppo
 
 ## 🔬 Core Research Question
 
-> **Believing the two outputs as one system would need at least the flag to meet the gate and the shipped ranking to beat random on the windows it flags, a criterion written after the results. The research questions are: (RQ1) at threshold 0.50, how do TinyKAN and logistic regression trade recall against specificity on OpenOximetry windows with the header-aligned labels of Section III-A; (RQ2) does firmware-style absolute ranking of mean-perturbation scores improve deletion area over the perturbation curve (AOPC) relative to random order on the exported model; (RQ3) what on-device evidence exists that the microcontroller evaluates the same function as the host export, and what remains unmeasured. Logistic regression is the prediction comparator, not the faithfulness comparator, and it does not run on the board.**
+> **Believing the two outputs as one system would need at least the flag to meet the gate and the shipped ranking to beat random on the windows it flags, a criterion written after the results. The research questions are: (RQ1) at threshold 0.50, how do the KAN and logistic regression trade recall against specificity on OpenOximetry windows with the header-aligned labels of Section III-A; (RQ2) does firmware-style absolute ranking of mean-perturbation scores improve deletion area over the perturbation curve (AOPC) relative to random order on the exported model; (RQ3) what on-device evidence exists that the microcontroller evaluates the same function as the host export, and what remains unmeasured. Logistic regression is the prediction comparator, not the faithfulness comparator, and it does not run on the board.**
 
 ### Key Objectives
-1. **PPG Feature Pipeline**: Extract 14 infrared features on each 5 s stride from a 10 s window.
-2. **On-Device Inference**: Execute the shipped TinyKAN on the microcontroller. Logistic regression is the host comparator and is not in the firmware.
+1. **PPG Feature Pipeline**: Extract 16 features (14 infrared, ratio of ratios, infrared perfusion index) on each 5 s stride from a 10 s window.
+2. **On-Device Inference**: Execute the edge KAN on the microcontroller (the earlier TinyKAN images remain buildable). Logistic regression is the host comparator and is not in the firmware.
 3. **On-Device Explainability**: Compute mean-perturbation attributions on-device.
 4. **Wireless Telemetry**: Transmit predictions and top-3 explanations via BLE to a Web Bluetooth dashboard.
 5. **Embedded Benchmarking**: Evaluate model size, memory overhead, latency, and explanation computational overhead.
@@ -36,12 +38,12 @@ This project investigates whether photoplethysmography (PPG) waveforms can suppo
 graph TD
     A["MAX30105 Optical Sensor"] -->|"Raw Red/IR PPG 50 Hz"| B["PPG Preprocessing"]
     B -->|"0.5-8 Hz bandpass"| C["Sliding Window 10s"]
-    C -->|"Feature extraction"| D["14 PPG Features"]
+    C -->|"Feature extraction"| D["16 PPG Features"]
     D --> F2
     D --> F1
     subgraph MCU["Inference Engine - Arduino Nano 33 BLE"]
-        F2["TinyKAN classifier"]
-        G2["Mean-perturbation attribution, 15 passes"]
+        F2["Edge KAN classifier, 1632 parameters"]
+        G2["Mean-perturbation attribution, 1 + 16"]
         F2 --> G2
     end
     subgraph HOST["Host comparator, not on the board"]
