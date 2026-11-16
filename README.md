@@ -15,7 +15,7 @@ This project investigates whether photoplethysmography (PPG) waveforms can suppo
 >
 > Tests that read `data/` or `outputs/` fail until the datasets are downloaded and the scripts rerun. Self-contained tests pass without data (253 passed on a fresh clone, Python 3.14). `test_feature_audit.py` and `test_qualification_probe.py` drive compiled C++ probes and need their paths as arguments, so they fail under plain `pytest`.
 >
-> Notebook outputs have been cleared. `outputs/` holds only the paper figures. Code: MIT. Docs and figures: CC BY 4.0. See `LICENSE`.
+> Notebook outputs have been cleared. `outputs/` holds the paper figures and the aggregate result files of the 11–13 Nov analyses (counts, means and intervals; no per-window or per-patient rows). Code: MIT. Docs and figures: CC BY 4.0. See `LICENSE`.
 
 ---
 

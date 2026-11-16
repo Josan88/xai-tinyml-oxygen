@@ -1,0 +1,25 @@
+grouping,model,metric,dark_minus_light,lo,hi,nan_draws,role,read
+monk_dorsal,TinyKAN,recall,-0.05866737181104986,-0.14853243561207935,0.021314753503035987,0,PRIMARY,no difference detected
+monk_dorsal,TinyKAN,specificity,-0.0410060339756797,-0.13461437196433096,0.03387511156772712,0,secondary,no difference detected
+monk_dorsal,TinyKAN,auc,-0.04473614429827366,-0.10739575164860693,0.008000197807765416,0,secondary,no difference detected
+monk_dorsal,LogReg,recall,-0.03362207235831627,-0.1422629333191312,0.06906045319559831,0,secondary,no difference detected
+monk_dorsal,LogReg,specificity,0.03182686201212537,-0.04568304746388402,0.09983781552174602,0,secondary,no difference detected
+monk_dorsal,LogReg,auc,-0.017337155989899156,-0.08324348543972349,0.0474801310367205,0,secondary,no difference detected
+monk_forehead,TinyKAN,recall,-0.05986660859525961,-0.14744390945907918,0.019390131569614482,0,secondary,no difference detected
+monk_forehead,TinyKAN,specificity,-0.052863825212818516,-0.14802413905078243,0.01515694903234615,0,secondary,no difference detected
+monk_forehead,TinyKAN,auc,-0.048190418081252906,-0.10729606784262553,0.004340583561447321,0,secondary,no difference detected
+monk_forehead,LogReg,recall,-0.031337128714582496,-0.14641928654314196,0.07087493344093332,0,secondary,no difference detected
+monk_forehead,LogReg,specificity,0.02050960225456866,-0.05159087206878098,0.08439107408123803,0,secondary,no difference detected
+monk_forehead,LogReg,auc,-0.021694891575163577,-0.08732526089738576,0.04221506871325694,0,secondary,no difference detected
+fitzpatrick,TinyKAN,recall,-0.07047201271314119,-0.1420468114740923,-0.010652445539393903,0,secondary,differs
+fitzpatrick,TinyKAN,specificity,-0.028870646337049943,-0.10335977197122996,0.032087184138939545,0,secondary,no difference detected
+fitzpatrick,TinyKAN,auc,-0.04057283586931759,-0.09226151441598694,0.0009893852895127018,0,secondary,no difference detected
+fitzpatrick,LogReg,recall,-0.03860287606043056,-0.12642325980988708,0.050675955323837514,0,secondary,no difference detected
+fitzpatrick,LogReg,specificity,0.024201470924302804,-0.03903409312589385,0.08263346304413936,0,secondary,no difference detected
+fitzpatrick,LogReg,auc,-0.02912471927435023,-0.08546650390485948,0.01791774884476945,0,secondary,no difference detected
+ita_dorsal_third,TinyKAN,recall,-0.03804300423726015,-0.12111520735931837,0.03757521717175259,0,secondary,no difference detected
+ita_dorsal_third,TinyKAN,specificity,-0.028710878373118698,-0.12168897072685349,0.039856784683074235,0,secondary,no difference detected
+ita_dorsal_third,TinyKAN,auc,-0.03136813193101162,-0.0865301708801244,0.013643870067454026,0,secondary,no difference detected
+ita_dorsal_third,LogReg,recall,-0.02084729458908552,-0.12500944446582438,0.06778315266661002,0,secondary,no difference detected
+ita_dorsal_third,LogReg,specificity,0.03216422032291977,-0.04300954793894415,0.10353112407863857,0,secondary,no difference detected
+ita_dorsal_third,LogReg,auc,-0.0017740571120486992,-0.06034773204050366,0.05102133837576053,0,secondary,no difference detected

@@ -1,0 +1,5 @@
+reference,target,value_at_all_reference_input
+training_mean,P,0.8906114908242319
+training_mean,u2_preactivation,1.8759657110802783
+label0_fp32,P,0.08083571803091426
+label0_fp32,u2_preactivation,-1.582293481919983

@@ -1,0 +1,65 @@
+{
+  "created_utc": "2026-11-11T04:19:59.703328+00:00",
+  "preregistration": "docs/skin-tone-stratification-preregistration.md (commit 75e9fa5, amendment A1)",
+  "threshold": 0.5,
+  "n_boot": 2000,
+  "boot_seed": 20261111,
+  "m0": {
+    "pooled": {
+      "auc": "0.908",
+      "recall": "89.3",
+      "specificity": "86.8"
+    },
+    "recordings": 154,
+    "patients": 87,
+    "windows": 48662,
+    "dorsal_recordings": {
+      "medium": 63,
+      "light": 47,
+      "dark": 44
+    }
+  },
+  "recordings_per_band": {
+    "monk_dorsal": {
+      "medium": 63,
+      "light": 47,
+      "dark": 44
+    },
+    "monk_forehead": {
+      "medium": 61,
+      "light": 48,
+      "dark": 45
+    },
+    "fitzpatrick": {
+      "dark": 61,
+      "medium": 49,
+      "light": 43,
+      "NaN": 1
+    },
+    "ita_dorsal_third": {
+      "light": 51,
+      "dark": 51,
+      "medium": 50,
+      "NaN": 2
+    }
+  },
+  "ita_dorsal_third_edges_deg": [
+    -84.81006135710813,
+    -19.619416864660714,
+    20.52327799112496,
+    56.144254921105905
+  ],
+  "inputs_sha256": {
+    "tinykan": "e1449fcac7d32bd691d4e1168fa3d7254dffb63c832cf937124162aa546a1611",
+    "logreg": "4ce1e78f08e43e26452cc21b6e5aa1165abe32256b710f9a79dcb1e49e2c80b7",
+    "features": "d96d93989f1ffa85f72689a2e084c898dacf18d4eafce50712fb0dcf3ad1b3d6",
+    "encounter": "1ec56a04de2907122853532b5bf695c9631d0bffeedd5e4e5405a3c182524df5",
+    "spectro": "91d007121b1c15aa5e2642eb32978c22c3f6c7d584e9a589fa63b9a5964851dc"
+  },
+  "script_sha256": "b538394dd6aafadb55c9f1e899588c65a3a5edf56d52af93f619fd4f72a5cd6f",
+  "environment": {
+    "python": "3.14.5",
+    "numpy": "2.4.6",
+    "pandas": "3.0.3"
+  }
+}

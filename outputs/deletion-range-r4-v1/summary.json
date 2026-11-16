@@ -1,0 +1,35 @@
+{
+  "created_utc": "2026-11-11T05:26:56.912610+00:00",
+  "preregistration": "docs/deletion-range-preregistration.md (ef0cdfd)",
+  "m0": {
+    "m0_2": {
+      "candidates": 28661,
+      "candidates_clamped": 11368,
+      "pass": true
+    },
+    "m0_1": {
+      "max_abs_diff": 4.806064490825435e-09,
+      "tolerance": 1e-08,
+      "pass": true
+    }
+  },
+  "readings": {
+    "R-A": "has range on flagged windows",
+    "R-A_share_no_range": 0.060639893932521546,
+    "R-B": "worse than random",
+    "R-C": "beats random"
+  },
+  "bootstrap": {
+    "unit": "patient",
+    "patients": 87,
+    "resamples": 2000,
+    "seed_base": 20261112
+  },
+  "inputs_sha256": {
+    "v2_features": "d96d93989f1ffa85f72689a2e084c898dacf18d4eafce50712fb0dcf3ad1b3d6",
+    "v2_header": "238db15a8a5bfdb0c9ef61656dd33eaad470ab340a3f3a05dded0fe977d0c574",
+    "label0_aopc": "8bfe47939540072696add62732ff7b2bc4bfa30480851f59d9b11e63bc906a52",
+    "preregistration": "19907d7217761c1a6f71759d5b234901998b04baf27a8956fcaed483451b7b77"
+  },
+  "script_sha256": "e1c408710e8d8b72cc8588009a772667be3874defeacaace164809980959901f"
+}

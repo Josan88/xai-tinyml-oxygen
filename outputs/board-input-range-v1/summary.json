@@ -1,0 +1,14 @@
+{
+  "preregistration": "docs/board-input-range-preregistration.md (eb986d6)",
+  "decisions": 35,
+  "training_rows": 48662,
+  "share_of_all_board_values_outside_training_range": 0.0,
+  "amplitude_inputs_out_of_distribution": [],
+  "reading": "no amplitude-dependent input out of distribution; keep the unmeasured-effect caveat",
+  "inputs_sha256": {
+    "capture": "37221255369768247e4bd325738a0b3d8de16eee23f00c6e2d06fd3ba21d0860",
+    "training": "d96d93989f1ffa85f72689a2e084c898dacf18d4eafce50712fb0dcf3ad1b3d6",
+    "header": "238db15a8a5bfdb0c9ef61656dd33eaad470ab340a3f3a05dded0fe977d0c574"
+  },
+  "script_sha256": "40832012a2790c5d252eeaa1db240bc4db0664c1a15846135fbd6e1f32bba59f"
+}
