@@ -1,0 +1,100 @@
+{
+  "created_utc": "2026-11-11T14:39:38.725809+00:00",
+  "stage": "parity",
+  "results": {
+    "ekan16": {
+      "rows": 48662,
+      "dims": 16,
+      "header_sha256": "ec219862de2d5fb546b6a5dc45549eae0af172b7d452e2075d37e5196d2e11bb",
+      "probe_exe_sha256": "39bdee1e37c62070b132cfdf248a8158746caa405de21b0ae8030065883fc3ff",
+      "probe_stderr": "rows=48662 dims=16 params=1632",
+      "e3_2_c_vs_header": {
+        "max_abs_probability_diff": 3.990814994025982e-07,
+        "max_abs_attribution_diff": 4.015979057081509e-07,
+        "fullpass_max_abs_probability_diff": 3.990814994025982e-07,
+        "fullpass_max_abs_attribution_diff": 4.015979057081509e-07,
+        "decision_disagreements_at_0_50": 0,
+        "tolerance": 1e-05,
+        "pass": true
+      },
+      "e3_3_top3": {
+        "rows_top3_differs": 0,
+        "max_gap_among_mismatches": 0.0,
+        "rows_not_explained_by_near_tie": 0,
+        "fullpass_rows_top3_differs": 0,
+        "fullpass_max_gap_among_mismatches": 0.0,
+        "near_tie_tolerance": 1e-05,
+        "pass": true
+      },
+      "e3_4_incremental_vs_fullpass": {
+        "max_abs_probability_diff": 0.0,
+        "max_abs_attribution_diff": 2.980232238769531e-07,
+        "rows_top3_differs": 0,
+        "tolerance": 1e-06,
+        "pass": true
+      }
+    },
+    "ekan14": {
+      "rows": 48662,
+      "dims": 14,
+      "header_sha256": "6baaad1447d3deefddf30d0ef69ad6d693964aa409ec398d166892ca95fbb1c5",
+      "probe_exe_sha256": "4a5f36ef446b579760ddaecfdbac5d561be771875141f13942f297257a828718",
+      "probe_stderr": "rows=48662 dims=14 params=1440",
+      "e3_2_c_vs_header": {
+        "max_abs_probability_diff": 1.4744681753331434e-07,
+        "max_abs_attribution_diff": 1.968200267765674e-07,
+        "fullpass_max_abs_probability_diff": 1.4744681753331434e-07,
+        "fullpass_max_abs_attribution_diff": 2.0705094727624385e-07,
+        "decision_disagreements_at_0_50": 0,
+        "tolerance": 1e-05,
+        "pass": true
+      },
+      "e3_3_top3": {
+        "rows_top3_differs": 0,
+        "max_gap_among_mismatches": 0.0,
+        "rows_not_explained_by_near_tie": 0,
+        "fullpass_rows_top3_differs": 0,
+        "fullpass_max_gap_among_mismatches": 0.0,
+        "near_tie_tolerance": 1e-05,
+        "pass": true
+      },
+      "e3_4_incremental_vs_fullpass": {
+        "max_abs_probability_diff": 0.0,
+        "max_abs_attribution_diff": 1.7881393432617188e-07,
+        "rows_top3_differs": 0,
+        "tolerance": 1e-06,
+        "pass": true
+      }
+    }
+  },
+  "all_pass": true,
+  "host_compiler": "zig 0.16.0 c++ (clang) -std=c++17 -O2 -ffp-contract=off -mcpu=baseline -target x86_64-windows-gnu",
+  "reference": "EdgeHeaderKAN: FP32 header constants, float64 arithmetic, raw inputs rounded to FP32",
+  "scope": "host only; not board parity",
+  "provenance": {
+    "docs/edge-kan-preregistration.md": "cb70b259aa265b815fa9d1052c447d922793d1689fa561a75a0065450e5ba2f1",
+    "scripts/train_edge_kan.py": "2ac6be46c460d4618a62285df0805347d73a3b5837f951b7660a29768c868a9d",
+    "scripts/train_tinykan_v2.py": "304d777b595565149f9e8240fc0053f8858606a342700c07f87f47a967a14739",
+    "scripts/evaluate_xai_faithfulness.py": "d0124f05a86f383510b71c34d5584550e49ba992ec515ec64d5faa05afc8d8a3",
+    "outputs/openox-v2/window_features.csv": "d96d93989f1ffa85f72689a2e084c898dacf18d4eafce50712fb0dcf3ad1b3d6",
+    "firmware/Arduino Nano 33/include/edge_kan_inference.h": "b28b99e7bc392a8ea29095c8cfbbea9569b472e1dc705320744c27c7d9c294c6",
+    "tests/edge_kan_probe.cpp": "f317008672a7ac444d917f523200561144a5b51d1edc6ad6d2fe3e8b196c8512",
+    "firmware/Arduino Nano 33/include/edge_kan_weights_v2.h": "ec219862de2d5fb546b6a5dc45549eae0af172b7d452e2075d37e5196d2e11bb",
+    "firmware/Arduino Nano 33/include/edge_kan_weights_ir14.h": "6baaad1447d3deefddf30d0ef69ad6d693964aa409ec398d166892ca95fbb1c5"
+  },
+  "protected_files_unchanged": {
+    "firmware/Arduino Nano 33/include/kan_model_weights.h": "123a305f0bb91a0bff79c298f7d35df3c113c660eede9afebdcd30ba96a3fe55",
+    "firmware/Arduino Nano 33/include/kan_model_weights_v2.h": "238db15a8a5bfdb0c9ef61656dd33eaad470ab340a3f3a05dded0fe977d0c574",
+    "firmware/Arduino Nano 33/include/kan_inference.h": "be7c629b41412b9f653e077f7dd87e5b7cacc19557ce32f08db366f826c2ad55",
+    "firmware/Arduino Nano 33/src/main.cpp": "264cedc8305c45ac4fc252353a0beb68a5978b2deb70dae533163612c985380f",
+    "firmware/Arduino Nano 33/platformio.ini": "3192798f0f2e36db921b8bd5f670d7cae32466297f60d4f7b52ccb707f8709ba"
+  },
+  "environment": {
+    "python": "3.14.5",
+    "numpy": "2.4.6",
+    "pandas": "3.0.3",
+    "torch": "2.12.0+cpu",
+    "sklearn": "1.9.0",
+    "platform": "Windows-11-10.0.26300-SP0"
+  }
+}

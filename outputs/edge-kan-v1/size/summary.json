@@ -1,0 +1,116 @@
+{
+  "created_utc": "2026-11-11T14:39:46.897999+00:00",
+  "stage": "size",
+  "compiler": "arm-none-eabi-g++.exe (GNU Tools for Arm Embedded Processors 7-2017-q4-major) 7.2.1 20170904 (release) [ARM/embedded-7-branch revision 255204]",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-mfloat-abi=hard",
+    "-mfpu=fpv4-sp-d16",
+    "-Os",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-std=gnu++17",
+    "-fno-exceptions",
+    "-fno-rtti"
+  ],
+  "results": {
+    "edge_kan_ekan16": {
+      "object_sha256": "e42ea86bf78f133b85205cb9fb6026b32731c5f1a43a41b7884be351ec452974",
+      "text_sections": {
+        ".text._ZL10ekan_basisfPf": 184,
+        ".text._ZL11ekan_layer2PKf": 84,
+        ".text._ZL21ekan_predict_with_xaiPKfP18EkanXaiAttributionPf.constprop.0": 560,
+        ".text.size_probe_entry": 4
+      },
+      "rodata_sections": {
+        ".rodata._ZL11EKAN1_THETA": 6144,
+        ".rodata._ZL11EKAN2_THETA": 384,
+        ".rodata._ZL12EKAN_CENTERS": 32,
+        ".rodata._ZL15EKAN_SCALER_STD": 64,
+        ".rodata._ZL16EKAN_SCALER_MEAN": 64,
+        ".rodata._ZL18EKAN_FEATURE_NAMES": 64,
+        ".rodata.str1.1": 203
+      },
+      "data_bss_bytes": 0,
+      "text_bytes": 832,
+      "rodata_bytes": 6955
+    },
+    "tinykan_v2_shipped": {
+      "object_sha256": "7c1194c7b6c16d524ebbdfa296f34c12db5b8a234f7dbd7dcd4b1769e8c83535",
+      "text_sections": {
+        ".text._Z15kan_standardizePKfPf": 60,
+        ".text._Z18kan_layer1_forwardPKfPf": 260,
+        ".text._Z18kan_layer2_forwardPKf": 232,
+        ".text._Z17kan_predict_logitPKf": 22,
+        ".text._Z11kan_sigmoidf": 24,
+        ".text._Z23kan_predict_probabilityPKf": 26,
+        ".text._Z21kan_sort_attributionsP17KanXaiAttributioni": 84,
+        ".text._Z20kan_predict_with_xaiPKfP17KanXaiAttribution": 188,
+        ".text.size_probe_entry": 4
+      },
+      "rodata_sections": {
+        ".rodata._ZL10KAN1_THETA": 384,
+        ".rodata._ZL10KAN2_THETA": 32,
+        ".rodata._ZL10SCALER_STD": 64,
+        ".rodata._ZL11SCALER_MEAN": 64,
+        ".rodata._ZL12KAN1_CENTERS": 32,
+        ".rodata._ZL17KAN_FEATURE_NAMES": 64,
+        ".rodata._ZL6KAN1_B": 48,
+        ".rodata._ZL6KAN1_W": 768,
+        ".rodata._ZL6KAN2_W": 48,
+        ".rodata.str1.1": 203
+      },
+      "data_bss_bytes": 0,
+      "text_bytes": 900,
+      "rodata_bytes": 1707
+    }
+  },
+  "operation_counts_16_inputs": {
+    "edge_kan": {
+      "forward_multiply_adds": 1632,
+      "forward_basis_evaluations": 28,
+      "xai_fullpass_multiply_adds": 27744,
+      "xai_fullpass_basis_evaluations": 476,
+      "xai_incremental_multiply_adds": 4704,
+      "xai_incremental_basis_evaluations": 252,
+      "theta_floats": 1632,
+      "theta_bytes_fp32": 6528
+    },
+    "tinykan": {
+      "forward_multiply_adds": 308,
+      "forward_basis_evaluations": 13,
+      "xai_fullpass_multiply_adds": 5236,
+      "xai_fullpass_basis_evaluations": 221,
+      "parameter_floats": 321
+    },
+    "note": "One basis evaluation = 8 bump values of one scalar (divide, fabs, cubic each). Scaler, sigmoid and sort not counted."
+  },
+  "note": "Object-file sizes, not a linked image and not board flash. kan_inference.h functions have external linkage, so every one is emitted (kan_predict_probability is off the XAI path); the edge engine's functions are static inline, so only the XAI path is emitted. expf/fabsf come from libm at link time.",
+  "provenance": {
+    "docs/edge-kan-preregistration.md": "cb70b259aa265b815fa9d1052c447d922793d1689fa561a75a0065450e5ba2f1",
+    "scripts/train_edge_kan.py": "2ac6be46c460d4618a62285df0805347d73a3b5837f951b7660a29768c868a9d",
+    "scripts/train_tinykan_v2.py": "304d777b595565149f9e8240fc0053f8858606a342700c07f87f47a967a14739",
+    "scripts/evaluate_xai_faithfulness.py": "d0124f05a86f383510b71c34d5584550e49ba992ec515ec64d5faa05afc8d8a3",
+    "outputs/openox-v2/window_features.csv": "d96d93989f1ffa85f72689a2e084c898dacf18d4eafce50712fb0dcf3ad1b3d6",
+    "firmware/Arduino Nano 33/include/edge_kan_inference.h": "b28b99e7bc392a8ea29095c8cfbbea9569b472e1dc705320744c27c7d9c294c6",
+    "firmware/Arduino Nano 33/include/edge_kan_weights_v2.h": "ec219862de2d5fb546b6a5dc45549eae0af172b7d452e2075d37e5196d2e11bb",
+    "firmware/Arduino Nano 33/include/kan_model_weights_v2.h": "238db15a8a5bfdb0c9ef61656dd33eaad470ab340a3f3a05dded0fe977d0c574",
+    "firmware/Arduino Nano 33/include/kan_inference.h": "be7c629b41412b9f653e077f7dd87e5b7cacc19557ce32f08db366f826c2ad55"
+  },
+  "protected_files_unchanged": {
+    "firmware/Arduino Nano 33/include/kan_model_weights.h": "123a305f0bb91a0bff79c298f7d35df3c113c660eede9afebdcd30ba96a3fe55",
+    "firmware/Arduino Nano 33/include/kan_model_weights_v2.h": "238db15a8a5bfdb0c9ef61656dd33eaad470ab340a3f3a05dded0fe977d0c574",
+    "firmware/Arduino Nano 33/include/kan_inference.h": "be7c629b41412b9f653e077f7dd87e5b7cacc19557ce32f08db366f826c2ad55",
+    "firmware/Arduino Nano 33/src/main.cpp": "264cedc8305c45ac4fc252353a0beb68a5978b2deb70dae533163612c985380f",
+    "firmware/Arduino Nano 33/platformio.ini": "3192798f0f2e36db921b8bd5f670d7cae32466297f60d4f7b52ccb707f8709ba"
+  },
+  "environment": {
+    "python": "3.14.5",
+    "numpy": "2.4.6",
+    "pandas": "3.0.3",
+    "torch": "2.12.0+cpu",
+    "sklearn": "1.9.0",
+    "platform": "Windows-11-10.0.26300-SP0"
+  }
+}

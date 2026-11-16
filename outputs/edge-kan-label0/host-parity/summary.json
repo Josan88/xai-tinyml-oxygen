@@ -1,0 +1,52 @@
+{
+  "created_utc": "2026-11-14T10:42:18+00:00",
+  "preregistration_sha256": "bf9886b1584486bc6709c47474f0966aeba18b0387f5ba0c93111d6e34ed0067",
+  "script_sha256": "80a36ad2cd5af8d46fbb37634c2ee61f44eba64809e745d58f0bb97592cc1c18",
+  "reference_header_sha256": "26d49e0e6b3d1362325214a072fa97cdabec728804dbfd9c82bb77e48e0bcda5",
+  "probe_source_sha256": "f317008672a7ac444d917f523200561144a5b51d1edc6ad6d2fe3e8b196c8512",
+  "table_sha256": "d96d93989f1ffa85f72689a2e084c898dacf18d4eafce50712fb0dcf3ad1b3d6",
+  "edge_header_sha256": "ec219862de2d5fb546b6a5dc45549eae0af172b7d452e2075d37e5196d2e11bb",
+  "zig": "uvx --from ziglang==0.16.0 python -m ziglang",
+  "zig_flags": [
+    "-std=c++17",
+    "-O2",
+    "-ffp-contract=off",
+    "-mcpu=baseline",
+    "-target",
+    "x86_64-windows-gnu"
+  ],
+  "windows": 48662,
+  "flag_off_probe_identical_to_archived": false,
+  "archived_probe_sha256": "39bdee1e37c62070b132cfdf248a8158746caa405de21b0ae8030065883fc3ff",
+  "probe_sha256": {
+    "flag_off": "49b73c55900091afae339f4bcd45fa9b1eeb865b544fa3c921f3fec86fb4135c",
+    "ref0": "cb2a7b091e2303928cebd4ce50566f4937b7d129965510f9fbb167240dfbb04d"
+  },
+  "python_reference": "EdgeModel float64; perturb_against(model, z, ref0)",
+  "rows_with_3rd_4th_gap_below_2e-5": 183,
+  "ref0_incremental_vs_python": {
+    "max_abs_dp": 3.990814994025982e-07,
+    "max_abs_ddelta": 3.8860452644673416e-07,
+    "rows_dp_over_1e-4": 0,
+    "rows_ddelta_over_1e-5": 0,
+    "top3_differs": 0,
+    "top3_differs_not_tie": 0,
+    "pass": true
+  },
+  "ref0_fullpass_vs_python": {
+    "max_abs_dp": 3.990814994025982e-07,
+    "max_abs_ddelta": 3.9661818496128376e-07,
+    "rows_dp_over_1e-4": 0,
+    "rows_ddelta_over_1e-5": 0,
+    "top3_differs": 0,
+    "top3_differs_not_tie": 0,
+    "pass": true
+  },
+  "ref0_incremental_vs_fullpass_max_abs_ddelta": 2.980232238769531e-07,
+  "reference_in_effect": {
+    "max_abs_ref0_minus_training_mean_delta_python": 0.7737113780734999,
+    "ref0_probe_vs_training_mean_python_rows_ddelta_over_1e-5": 48662,
+    "flagoff_probe_vs_training_mean_python_max_abs_ddelta": 4.015979057081509e-07
+  },
+  "g3_pass": true
+}

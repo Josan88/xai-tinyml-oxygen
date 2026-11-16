@@ -1,0 +1,475 @@
+{
+  "created_utc": "2026-11-11T14:44:12.875038+00:00",
+  "stage": "cv",
+  "threshold": 0.5,
+  "gate": {
+    "recall": 0.8,
+    "specificity": 0.5
+  },
+  "threshold_note": "0.50 is TinyKAN's frozen operating point, applied unchanged; not calibrated for the edge KAN",
+  "recipe": {
+    "layers": "edge KAN, theta (d_out, d_in, n_knots), no W, no bias",
+    "hidden": 12,
+    "knots": 8,
+    "degree": 3,
+    "spline_range": [
+      -3.0,
+      3.0
+    ],
+    "init": "theta[j,i,:] = xavier_uniform w[j,i] * identity coefficients",
+    "lr": 0.01,
+    "weight_decay": 0.0001,
+    "epochs": 100,
+    "seed": 42,
+    "smoothness": 1e-05,
+    "grad_clip": 10.0,
+    "scaler": "StandardScaler per training fold",
+    "cv": "GroupKFold(5)"
+  },
+  "e0_same_split_checks": {
+    "ekan16_recording": {
+      "comparator": "b_v2_tinykan16",
+      "same_folds": true,
+      "same_labels": true
+    },
+    "ekan16_patient": {
+      "comparator": "b_v2_tinykan16_patient",
+      "same_folds": true,
+      "same_labels": true
+    },
+    "ekan14_recording": {
+      "comparator": "a_v2_tinykan14",
+      "same_folds": true,
+      "same_labels": true
+    }
+  },
+  "variants": [
+    {
+      "variant": "ekan16_recording",
+      "learner": "edge_kan",
+      "model": "ekan16",
+      "grouping": "recording_id",
+      "n_features": 16,
+      "groups": 154,
+      "rows": 48662,
+      "prevalence": 0.5917348238872221,
+      "auc": 0.922894795100039,
+      "tn": 17665,
+      "fp": 2202,
+      "fn": 3826,
+      "tp": 24969,
+      "recall": 0.8671297100191006,
+      "specificity": 0.889162933507827,
+      "precision": 0.918957712266755,
+      "f1": 0.8922917485616267,
+      "accuracy": 0.8761251078870577,
+      "p_pos_median": 0.8781098994809867,
+      "p_pos_q25": 0.6923554253310888,
+      "p_pos_q75": 0.945819190126974,
+      "p_neg_median": 0.11746380984737183,
+      "p_neg_q25": 0.05766417842991682,
+      "p_neg_q75": 0.25528414137675914,
+      "meets_gate_at_0_50": true,
+      "fold_aucs": [
+        0.9084708284400722,
+        0.9143209225540103,
+        0.9412800553537449,
+        0.9307853651567918,
+        0.928893110658186
+      ]
+    },
+    {
+      "variant": "ekan16_patient",
+      "learner": "edge_kan",
+      "model": "ekan16",
+      "grouping": "patient_id",
+      "n_features": 16,
+      "groups": 87,
+      "rows": 48662,
+      "prevalence": 0.5917348238872221,
+      "auc": 0.9198914865816352,
+      "tn": 17575,
+      "fp": 2292,
+      "fn": 3971,
+      "tp": 24824,
+      "recall": 0.8620941135613822,
+      "specificity": 0.8846328081743595,
+      "precision": 0.9154742587402271,
+      "f1": 0.8879826867700452,
+      "accuracy": 0.8712958776869015,
+      "p_pos_median": 0.8790628700303468,
+      "p_pos_q25": 0.6948167684206039,
+      "p_pos_q75": 0.9477860765355078,
+      "p_neg_median": 0.11276859136096135,
+      "p_neg_q25": 0.05151283391223899,
+      "p_neg_q75": 0.25869519362215104,
+      "meets_gate_at_0_50": true,
+      "fold_aucs": [
+        0.9117801768360664,
+        0.9328745264892762,
+        0.9126384841884038,
+        0.9042211351944,
+        0.9363018027501179
+      ]
+    },
+    {
+      "variant": "ekan14_recording",
+      "learner": "edge_kan",
+      "model": "ekan14",
+      "grouping": "recording_id",
+      "n_features": 14,
+      "groups": 154,
+      "rows": 48662,
+      "prevalence": 0.5917348238872221,
+      "auc": 0.7041673962900343,
+      "tn": 13100,
+      "fp": 6767,
+      "fn": 10680,
+      "tp": 18115,
+      "recall": 0.6291022747004689,
+      "specificity": 0.659384909649167,
+      "precision": 0.7280363314846073,
+      "f1": 0.6749632058423533,
+      "accuracy": 0.6414656199909581,
+      "p_pos_median": 0.5731534947281193,
+      "p_pos_q25": 0.4236263278705336,
+      "p_pos_q75": 0.7162147017149834,
+      "p_neg_median": 0.41500177100574454,
+      "p_neg_q25": 0.2991707587456391,
+      "p_neg_q75": 0.5575853385805891,
+      "meets_gate_at_0_50": false,
+      "fold_aucs": [
+        0.7008842625170945,
+        0.723145715592336,
+        0.7271997530101884,
+        0.705262891939973,
+        0.7054704905647117
+      ]
+    }
+  ],
+  "variant_training": {
+    "ekan16_recording": {
+      "folds": [
+        {
+          "fold": 1,
+          "train_rows": 38925,
+          "test_rows": 9737,
+          "loss_first": 0.5687430500984192,
+          "loss_last": 0.2690233588218689,
+          "losses_finite": true
+        },
+        {
+          "fold": 2,
+          "train_rows": 38913,
+          "test_rows": 9749,
+          "loss_first": 0.5754727125167847,
+          "loss_last": 0.2786307632923126,
+          "losses_finite": true
+        },
+        {
+          "fold": 3,
+          "train_rows": 38931,
+          "test_rows": 9731,
+          "loss_first": 0.5758660435676575,
+          "loss_last": 0.28807973861694336,
+          "losses_finite": true
+        },
+        {
+          "fold": 4,
+          "train_rows": 38917,
+          "test_rows": 9745,
+          "loss_first": 0.5877905488014221,
+          "loss_last": 0.28092625737190247,
+          "losses_finite": true
+        },
+        {
+          "fold": 5,
+          "train_rows": 38962,
+          "test_rows": 9700,
+          "loss_first": 0.5774831771850586,
+          "loss_last": 0.24336369335651398,
+          "losses_finite": true
+        }
+      ],
+      "comparator": "b_v2_tinykan16"
+    },
+    "ekan16_patient": {
+      "folds": [
+        {
+          "fold": 1,
+          "train_rows": 38920,
+          "test_rows": 9742,
+          "loss_first": 0.5750854015350342,
+          "loss_last": 0.2716084420681,
+          "losses_finite": true
+        },
+        {
+          "fold": 2,
+          "train_rows": 38966,
+          "test_rows": 9696,
+          "loss_first": 0.5694254636764526,
+          "loss_last": 0.28131401538848877,
+          "losses_finite": true
+        },
+        {
+          "fold": 3,
+          "train_rows": 38893,
+          "test_rows": 9769,
+          "loss_first": 0.5854998826980591,
+          "loss_last": 0.27512794733047485,
+          "losses_finite": true
+        },
+        {
+          "fold": 4,
+          "train_rows": 38974,
+          "test_rows": 9688,
+          "loss_first": 0.5726786255836487,
+          "loss_last": 0.2788313627243042,
+          "losses_finite": true
+        },
+        {
+          "fold": 5,
+          "train_rows": 38895,
+          "test_rows": 9767,
+          "loss_first": 0.5809023380279541,
+          "loss_last": 0.251444011926651,
+          "losses_finite": true
+        }
+      ],
+      "comparator": "b_v2_tinykan16_patient"
+    },
+    "ekan14_recording": {
+      "folds": [
+        {
+          "fold": 1,
+          "train_rows": 38925,
+          "test_rows": 9737,
+          "loss_first": 0.5660076141357422,
+          "loss_last": 0.4950827360153198,
+          "losses_finite": true
+        },
+        {
+          "fold": 2,
+          "train_rows": 38913,
+          "test_rows": 9749,
+          "loss_first": 0.5723822712898254,
+          "loss_last": 0.501822829246521,
+          "losses_finite": true
+        },
+        {
+          "fold": 3,
+          "train_rows": 38931,
+          "test_rows": 9731,
+          "loss_first": 0.5739255547523499,
+          "loss_last": 0.5030199289321899,
+          "losses_finite": true
+        },
+        {
+          "fold": 4,
+          "train_rows": 38917,
+          "test_rows": 9745,
+          "loss_first": 0.6027441620826721,
+          "loss_last": 0.4960128664970398,
+          "losses_finite": true
+        },
+        {
+          "fold": 5,
+          "train_rows": 38962,
+          "test_rows": 9700,
+          "loss_first": 0.5640990734100342,
+          "loss_last": 0.49883684515953064,
+          "losses_finite": true
+        }
+      ],
+      "comparator": "a_v2_tinykan14"
+    }
+  },
+  "comparators": [
+    {
+      "variant": "a_v2_tinykan14",
+      "learner": "tinykan",
+      "model": "a_v2_tinykan14",
+      "grouping": "recording_id",
+      "n_features": 14,
+      "groups": 154,
+      "rows": 48662,
+      "prevalence": 0.5917348238872221,
+      "auc": 0.7117319303425078,
+      "tn": 13519,
+      "fp": 6348,
+      "fn": 11219,
+      "tp": 17576,
+      "recall": 0.6103837471783295,
+      "specificity": 0.6804751598127549,
+      "precision": 0.7346597558936633,
+      "f1": 0.666780477626662,
+      "accuracy": 0.6389996301015166,
+      "p_pos_median": 0.5770263075828552,
+      "p_pos_q25": 0.413887619972229,
+      "p_pos_q75": 0.7273208498954773,
+      "p_neg_median": 0.3972329795360565,
+      "p_neg_q25": 0.30591386556625366,
+      "p_neg_q75": 0.5496802926063538,
+      "meets_gate_at_0_50": false
+    },
+    {
+      "variant": "b_v2_tinykan16",
+      "learner": "tinykan",
+      "model": "b_v2_tinykan16",
+      "grouping": "recording_id",
+      "n_features": 16,
+      "groups": 154,
+      "rows": 48662,
+      "prevalence": 0.5917348238872221,
+      "auc": 0.9075283627964827,
+      "tn": 17245,
+      "fp": 2622,
+      "fn": 3090,
+      "tp": 25705,
+      "recall": 0.8926897030734503,
+      "specificity": 0.8680223486183117,
+      "precision": 0.9074381332297807,
+      "f1": 0.9000035012779666,
+      "accuracy": 0.8826188812625868,
+      "p_pos_median": 0.8901359438896179,
+      "p_pos_q25": 0.8613292872905731,
+      "p_pos_q75": 0.8942375779151917,
+      "p_neg_median": 0.0923529639840126,
+      "p_neg_q25": 0.07663483545184135,
+      "p_neg_q75": 0.16667854785919184,
+      "meets_gate_at_0_50": true
+    },
+    {
+      "variant": "b_v2_tinykan16_patient",
+      "learner": "tinykan",
+      "model": "b_v2_tinykan16_patient",
+      "grouping": "patient_id",
+      "n_features": 16,
+      "groups": 87,
+      "rows": 48662,
+      "prevalence": 0.5917348238872221,
+      "auc": 0.9069360588073916,
+      "tn": 17156,
+      "fp": 2711,
+      "fn": 2899,
+      "tp": 25896,
+      "recall": 0.8993227990970655,
+      "specificity": 0.8635425580107716,
+      "precision": 0.9052329849337575,
+      "f1": 0.9022682136510922,
+      "accuracy": 0.8847149726686121,
+      "p_pos_median": 0.8877617120742798,
+      "p_pos_q25": 0.8627511858940125,
+      "p_pos_q75": 0.8935334086418152,
+      "p_neg_median": 0.088636577129364,
+      "p_neg_q25": 0.07370816543698305,
+      "p_neg_q75": 0.18194993585348124,
+      "meets_gate_at_0_50": true
+    },
+    {
+      "variant": "c_v2_logreg16",
+      "learner": "logreg",
+      "model": "c_v2_logreg16",
+      "grouping": "recording_id",
+      "n_features": 16,
+      "groups": 154,
+      "rows": 48662,
+      "prevalence": 0.5917348238872221,
+      "auc": 0.8630922610529321,
+      "tn": 17286,
+      "fp": 2581,
+      "fn": 5142,
+      "tp": 23653,
+      "recall": 0.8214273311338774,
+      "specificity": 0.8700860723813358,
+      "precision": 0.9016162232217733,
+      "f1": 0.8596558178415017,
+      "accuracy": 0.8412930006986972,
+      "p_pos_median": 0.6618975165367139,
+      "p_pos_q25": 0.5497226227892972,
+      "p_pos_q75": 0.7581881904494339,
+      "p_neg_median": 0.3345280250832375,
+      "p_neg_q25": 0.23785993155492097,
+      "p_neg_q75": 0.4233397986318303,
+      "meets_gate_at_0_50": true
+    }
+  ],
+  "comparator_reproduction_max_abs_difference": {
+    "a_v2_tinykan14": 0.0,
+    "b_v2_tinykan16": 0.0,
+    "b_v2_tinykan16_patient": 0.0,
+    "c_v2_logreg16": 0.0
+  },
+  "e2_paired_bootstrap": {
+    "ekan16_recording_vs_b_v2_tinykan16": {
+      "patients": 87,
+      "resamples": 2000,
+      "skipped_single_class": 0,
+      "seed": 20261111,
+      "auc": {
+        "difference_edge_minus_tinykan": 0.015366432303556277,
+        "ci95_low": 0.006109711882026423,
+        "ci95_high": 0.02421702543987934,
+        "reading": "edge KAN higher"
+      },
+      "recall": {
+        "difference_edge_minus_tinykan": -0.02555999305434975,
+        "ci95_low": -0.045706165987302025,
+        "ci95_high": -0.002835422774779709,
+        "reading": "edge KAN lower"
+      },
+      "specificity": {
+        "difference_edge_minus_tinykan": 0.021140584889515313,
+        "ci95_low": 0.0024555637776063734,
+        "ci95_high": 0.03935988427851338,
+        "reading": "edge KAN higher"
+      }
+    },
+    "ekan14_recording_vs_a_v2_tinykan14": {
+      "patients": 87,
+      "resamples": 2000,
+      "skipped_single_class": 0,
+      "seed": 20261111,
+      "auc": {
+        "difference_edge_minus_tinykan": -0.007564534052473482,
+        "ci95_low": -0.011613167179151795,
+        "ci95_high": -0.0036385371307696276,
+        "reading": "edge KAN lower"
+      },
+      "recall": {
+        "difference_edge_minus_tinykan": 0.018718527522139317,
+        "ci95_low": -0.005929300627753637,
+        "ci95_high": 0.03812387575072911,
+        "reading": "no difference detected at this resolution"
+      },
+      "specificity": {
+        "difference_edge_minus_tinykan": -0.021090250163587898,
+        "ci95_low": -0.034679863125312835,
+        "ci95_high": -0.004646609345291957,
+        "reading": "edge KAN lower"
+      }
+    }
+  },
+  "provenance": {
+    "docs/edge-kan-preregistration.md": "cb70b259aa265b815fa9d1052c447d922793d1689fa561a75a0065450e5ba2f1",
+    "scripts/train_edge_kan.py": "2ac6be46c460d4618a62285df0805347d73a3b5837f951b7660a29768c868a9d",
+    "scripts/train_tinykan_v2.py": "304d777b595565149f9e8240fc0053f8858606a342700c07f87f47a967a14739",
+    "scripts/evaluate_xai_faithfulness.py": "d0124f05a86f383510b71c34d5584550e49ba992ec515ec64d5faa05afc8d8a3",
+    "outputs/openox-v2/window_features.csv": "d96d93989f1ffa85f72689a2e084c898dacf18d4eafce50712fb0dcf3ad1b3d6"
+  },
+  "protected_files_unchanged": {
+    "firmware/Arduino Nano 33/include/kan_model_weights.h": "123a305f0bb91a0bff79c298f7d35df3c113c660eede9afebdcd30ba96a3fe55",
+    "firmware/Arduino Nano 33/include/kan_model_weights_v2.h": "238db15a8a5bfdb0c9ef61656dd33eaad470ab340a3f3a05dded0fe977d0c574",
+    "firmware/Arduino Nano 33/include/kan_inference.h": "be7c629b41412b9f653e077f7dd87e5b7cacc19557ce32f08db366f826c2ad55",
+    "firmware/Arduino Nano 33/src/main.cpp": "264cedc8305c45ac4fc252353a0beb68a5978b2deb70dae533163612c985380f",
+    "firmware/Arduino Nano 33/platformio.ini": "3192798f0f2e36db921b8bd5f670d7cae32466297f60d4f7b52ccb707f8709ba"
+  },
+  "environment": {
+    "python": "3.14.5",
+    "numpy": "2.4.6",
+    "pandas": "3.0.3",
+    "torch": "2.12.0+cpu",
+    "sklearn": "1.9.0",
+    "platform": "Windows-11-10.0.26300-SP0"
+  }
+}

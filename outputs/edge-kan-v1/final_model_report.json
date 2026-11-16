@@ -1,0 +1,203 @@
+{
+  "created_utc": "2026-11-11T14:38:47.106688+00:00",
+  "stage": "final",
+  "models": {
+    "ekan16": {
+      "header": "firmware/Arduino Nano 33/include/edge_kan_weights_v2.h",
+      "header_sha256": "ec219862de2d5fb546b6a5dc45549eae0af172b7d452e2075d37e5196d2e11bb",
+      "description": "16 v2 inputs (14 IR + ratio_of_ratios + ir_perfusion_index); primary",
+      "features": [
+        "mean",
+        "std",
+        "minimum",
+        "maximum",
+        "value_range",
+        "rms",
+        "skewness",
+        "kurtosis",
+        "energy",
+        "derivative_std",
+        "dominant_frequency_hz",
+        "bandpower_0_5_2_hz",
+        "bandpower_2_5_hz",
+        "bandpower_ratio_0_5_2_to_2_5",
+        "ratio_of_ratios",
+        "ir_perfusion_index"
+      ],
+      "dims": [
+        16,
+        12,
+        1
+      ],
+      "parameter_count": 1632,
+      "torch_parameter_count": 1632,
+      "loss_first": 0.5751254558563232,
+      "loss_last": 0.27563679218292236,
+      "losses_finite": true,
+      "e3_1_torch_vs_header": {
+        "rows": 48662,
+        "tolerance": 1e-05,
+        "max_abs_logit_diff": 2.5407434383062366e-06,
+        "max_abs_probability_diff": 4.948778066227177e-07,
+        "decision_disagreements_at_0_50": 0,
+        "comparison": "parsed-header NumPy float64 forward on raw FP32 features vs torch float32 forward on scaler output"
+      },
+      "training_set_metrics_at_0_50": {
+        "rows": 48662,
+        "prevalence": 0.5917348238872221,
+        "auc": 0.9313775467774051,
+        "tn": 17657,
+        "fp": 2210,
+        "fn": 3419,
+        "tp": 25376,
+        "recall": 0.8812641083521444,
+        "specificity": 0.8887602557004077,
+        "precision": 0.9198868991517436,
+        "f1": 0.9001614018907078,
+        "accuracy": 0.8843245242694505,
+        "p_pos_median": 0.8787274128565598,
+        "p_pos_q25": 0.7029377448486434,
+        "p_pos_q75": 0.948586058355174,
+        "p_neg_median": 0.1307333962978916,
+        "p_neg_q25": 0.06249488431526896,
+        "p_neg_q75": 0.2726483860973644
+      },
+      "training_set_metrics_note": "resubstitution on the training rows; not a generalisation estimate (see cv_summary.json)",
+      "hidden_activation_range": {
+        "min": -4.330806707385575,
+        "max": 3.8553642124519523,
+        "fraction_outside_grid": 0.0032314742509555712
+      },
+      "input_fraction_outside_grid": 0.009446539394188484,
+      "operation_counts": {
+        "edge_kan": {
+          "forward_multiply_adds": 1632,
+          "forward_basis_evaluations": 28,
+          "xai_fullpass_multiply_adds": 27744,
+          "xai_fullpass_basis_evaluations": 476,
+          "xai_incremental_multiply_adds": 4704,
+          "xai_incremental_basis_evaluations": 252,
+          "theta_floats": 1632,
+          "theta_bytes_fp32": 6528
+        },
+        "tinykan": {
+          "forward_multiply_adds": 308,
+          "forward_basis_evaluations": 13,
+          "xai_fullpass_multiply_adds": 5236,
+          "xai_fullpass_basis_evaluations": 221,
+          "parameter_floats": 321
+        },
+        "note": "One basis evaluation = 8 bump values of one scalar (divide, fabs, cubic each). Scaler, sigmoid and sort not counted."
+      }
+    },
+    "ekan14": {
+      "header": "firmware/Arduino Nano 33/include/edge_kan_weights_ir14.h",
+      "header_sha256": "6baaad1447d3deefddf30d0ef69ad6d693964aa409ec398d166892ca95fbb1c5",
+      "description": "14 IR inputs; secondary",
+      "features": [
+        "mean",
+        "std",
+        "minimum",
+        "maximum",
+        "value_range",
+        "rms",
+        "skewness",
+        "kurtosis",
+        "energy",
+        "derivative_std",
+        "dominant_frequency_hz",
+        "bandpower_0_5_2_hz",
+        "bandpower_2_5_hz",
+        "bandpower_ratio_0_5_2_to_2_5"
+      ],
+      "dims": [
+        14,
+        12,
+        1
+      ],
+      "parameter_count": 1440,
+      "torch_parameter_count": 1440,
+      "loss_first": 0.5692002177238464,
+      "loss_last": 0.5014448761940002,
+      "losses_finite": true,
+      "e3_1_torch_vs_header": {
+        "rows": 48662,
+        "tolerance": 1e-05,
+        "max_abs_logit_diff": 6.895531823314371e-07,
+        "max_abs_probability_diff": 1.5713527135030603e-07,
+        "decision_disagreements_at_0_50": 0,
+        "comparison": "parsed-header NumPy float64 forward on raw FP32 features vs torch float32 forward on scaler output"
+      },
+      "training_set_metrics_at_0_50": {
+        "rows": 48662,
+        "prevalence": 0.5917348238872221,
+        "auc": 0.7195894974544779,
+        "tn": 13352,
+        "fp": 6515,
+        "fn": 10374,
+        "tp": 18421,
+        "recall": 0.6397291196388262,
+        "specificity": 0.6720692605828761,
+        "precision": 0.7387311517484761,
+        "f1": 0.6856749362565371,
+        "accuracy": 0.6529324729768607,
+        "p_pos_median": 0.5782346038427812,
+        "p_pos_q25": 0.44027166531543005,
+        "p_pos_q75": 0.7159938716987038,
+        "p_neg_median": 0.4168360380069058,
+        "p_neg_q25": 0.3001783373429899,
+        "p_neg_q75": 0.5459470534357179
+      },
+      "training_set_metrics_note": "resubstitution on the training rows; not a generalisation estimate (see cv_summary.json)",
+      "hidden_activation_range": {
+        "min": -4.2355963267181655,
+        "max": 3.395399267685311,
+        "fraction_outside_grid": 0.00012501198745085146
+      },
+      "input_fraction_outside_grid": 0.010098815737712619,
+      "operation_counts": {
+        "edge_kan": {
+          "forward_multiply_adds": 1440,
+          "forward_basis_evaluations": 26,
+          "xai_fullpass_multiply_adds": 21600,
+          "xai_fullpass_basis_evaluations": 390,
+          "xai_incremental_multiply_adds": 4128,
+          "xai_incremental_basis_evaluations": 222,
+          "theta_floats": 1440,
+          "theta_bytes_fp32": 5760
+        },
+        "tinykan": {
+          "forward_multiply_adds": 284,
+          "forward_basis_evaluations": 13,
+          "xai_fullpass_multiply_adds": 4260,
+          "xai_fullpass_basis_evaluations": 195,
+          "parameter_floats": 297
+        },
+        "note": "One basis evaluation = 8 bump values of one scalar (divide, fabs, cubic each). Scaler, sigmoid and sort not counted."
+      }
+    }
+  },
+  "provenance": {
+    "docs/edge-kan-preregistration.md": "cb70b259aa265b815fa9d1052c447d922793d1689fa561a75a0065450e5ba2f1",
+    "scripts/train_edge_kan.py": "2ac6be46c460d4618a62285df0805347d73a3b5837f951b7660a29768c868a9d",
+    "scripts/train_tinykan_v2.py": "304d777b595565149f9e8240fc0053f8858606a342700c07f87f47a967a14739",
+    "scripts/evaluate_xai_faithfulness.py": "d0124f05a86f383510b71c34d5584550e49ba992ec515ec64d5faa05afc8d8a3",
+    "outputs/openox-v2/window_features.csv": "d96d93989f1ffa85f72689a2e084c898dacf18d4eafce50712fb0dcf3ad1b3d6",
+    "firmware/Arduino Nano 33/include/edge_kan_inference.h": "b28b99e7bc392a8ea29095c8cfbbea9569b472e1dc705320744c27c7d9c294c6"
+  },
+  "protected_files_unchanged": {
+    "firmware/Arduino Nano 33/include/kan_model_weights.h": "123a305f0bb91a0bff79c298f7d35df3c113c660eede9afebdcd30ba96a3fe55",
+    "firmware/Arduino Nano 33/include/kan_model_weights_v2.h": "238db15a8a5bfdb0c9ef61656dd33eaad470ab340a3f3a05dded0fe977d0c574",
+    "firmware/Arduino Nano 33/include/kan_inference.h": "be7c629b41412b9f653e077f7dd87e5b7cacc19557ce32f08db366f826c2ad55",
+    "firmware/Arduino Nano 33/src/main.cpp": "264cedc8305c45ac4fc252353a0beb68a5978b2deb70dae533163612c985380f",
+    "firmware/Arduino Nano 33/platformio.ini": "3192798f0f2e36db921b8bd5f670d7cae32466297f60d4f7b52ccb707f8709ba"
+  },
+  "environment": {
+    "python": "3.14.5",
+    "numpy": "2.4.6",
+    "pandas": "3.0.3",
+    "torch": "2.12.0+cpu",
+    "sklearn": "1.9.0",
+    "platform": "Windows-11-10.0.26300-SP0"
+  }
+}
