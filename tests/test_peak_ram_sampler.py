@@ -347,7 +347,7 @@ class SamplerAnalyserTests(unittest.TestCase):
     def test_1_nov_identify_captures_fail_config(self):
         # Board data (read only): the two 1 Nov identify captures of the 31 Oct images.
         run = ROOT / "outputs" / "peak-ram-sampler-board-20261101"
-        for env in apr.SAMPLER_IMAGES:
+        for env in ("nano33ble_peakram_sampler", "nano33ble_v2_f1a_peakram_sampler"):  # not SAMPLER_IMAGES: it grew later
             with self.subTest(env=env):
                 lines = (run / f"{env}_identify.txt").read_text(encoding="utf-8", errors="replace").splitlines()
                 rep = apr.analyse(lines, env, sampler=True)

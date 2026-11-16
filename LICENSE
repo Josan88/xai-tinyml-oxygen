@@ -21,5 +21,5 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ---
-Documentation (docs/, *.md) and figures are licensed under CC BY 4.0
-(https://creativecommons.org/licenses/by/4.0/).
+Documentation (docs/, *.md), figures, and the result files under outputs/
+are licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/).
