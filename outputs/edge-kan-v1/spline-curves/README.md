@@ -6,6 +6,7 @@ These files back paper Fig. 6 and its caption's line "All 204 splines are plotte
 |---|---|
 | `spline_curves.csv` | Every spline on 241 standardised grid points in [−3, 3]. There are 192 input–hidden splines φ<sub>j,i</sub> (`layer = input_hidden`, with `raw_value` giving the grid in the input's own units) and 12 hidden–output splines ψ<sub>j</sub> (`layer = hidden_output`). Arguments are clamped to ±3, as on the device. |
 | `all_splines_grid.png` / `.pdf` | All 204 splines, one panel per input plus one for the output splines. Each line is solid over the 1st–99th percentile of that input (or of h<sub>j</sub>) in the 48,662 training windows. |
+| `label_share_by_ratio_bin.csv` | For each ratio-of-ratios bin: windows, patients, the share labelled positive, and mean P. The bins were chosen after looking at the data, so the table is descriptive. |
 
 Fig. 6 itself is `../../ieee-paper-figures-edge-kan/fig6_kan_splines_ratio_600dpi.png` (vector copy `fig6_kan_splines_ratio.pdf`). It was drawn from these same arrays.
 
