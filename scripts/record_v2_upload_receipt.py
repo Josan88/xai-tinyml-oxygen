@@ -41,7 +41,12 @@ EKAN_ARCHIVES = {f"outputs/firmware-ekan/{env}": env for env in
                   "nano33ble_ekan_pipeline_timing", "nano33ble_ekan_looptiming3", "nano33ble_ekan_f1a_peakram_sampler")}
 EKAN_REF0_ARCHIVES = {f"outputs/firmware-ekan-ref0/{env}": env for env in   # docs/edge-kan-label0-board-preregistration.md
                       ("nano33ble_ekan_context_parity_ref0", "nano33ble_ekan_pipeline_timing_ref0", "nano33ble_ekan_f1a_ref0")}
-ARCHIVES = {**R2_ARCHIVES, **REF0_ARCHIVES, **P5_ARCHIVES, **SPO2_ARCHIVES, **EKAN_ARCHIVES, **EKAN_REF0_ARCHIVES}
+# Edge-KAN hardware-FPU builds (Module 8 review M11, docs/module8-review-fpu-plan.md, 19 Nov 2026). Never shipped.
+EKAN_FPU_ARCHIVES = {f"outputs/firmware-ekan-fpu/{env}": env for env in
+                     ("nano33ble_ekan_context_parity_fpu", "nano33ble_ekan_pipeline_timing_fpu",
+                      "nano33ble_ekan_context_timing_fpu")}
+ARCHIVES = {**R2_ARCHIVES, **REF0_ARCHIVES, **P5_ARCHIVES, **SPO2_ARCHIVES, **EKAN_ARCHIVES, **EKAN_REF0_ARCHIVES,
+            **EKAN_FPU_ARCHIVES}
 
 
 def sha256(path):

@@ -1,0 +1,232 @@
+{
+  "note": "Aggregate summary of the 19 Nov 2026 edge-KAN hardware-FPU board runs (Module 8 review M11); per-window board replay rows are withheld under the PhysioNet Restricted Health Data License.",
+  "plan": {
+    "path": "docs/module8-review-fpu-plan.md",
+    "preregistration_sha256": "c989aeedad475aa58957215dbc7c0f54d2d65aecd72b4aa42f39a2a595c55449",
+    "public_scrub_note": "Local Python interpreter path in the runbook was replaced with PY=\"python\" for public release; preregistration_sha256 is the hash of the pre-run private copy recorded by the board driver."
+  },
+  "builds": {
+    "nano33ble_ekan_pipeline_timing_fpu": {
+      "env": "nano33ble_ekan_pipeline_timing_fpu",
+      "soft_float_base_env": "nano33ble_ekan_pipeline_timing",
+      "created_utc": "2026-11-19T07:24:26.817332+00:00",
+      "build_log_check": {
+        "compile_lines": 68,
+        "compiler_and_linker_lines_checked": 69,
+        "preprocessor_lines_skipped": 1,
+        "response_file_lines_skipped": 0,
+        "lines_with_mfloat_abi_soft": 0,
+        "lines_lacking_softfp_fpu": 0
+      },
+      "size_lines": [
+        "RAM:   [====      ]  35.2% (used 92320 bytes from 262144 bytes)",
+        "Flash: [===       ]  34.7% (used 340660 bytes from 983040 bytes)"
+      ],
+      "image_sha256": "b4d5dc6e269def3a57ec2fa1dc221fc018a14123c0ee4f257806a0cf1a645a21",
+      "image_bytes": 340660,
+      "soft_float_image_sha256": "d1cccebe74901fb6ccfc2f1845c9fde8ffc404ac1e8c31d28f3c111044ebe69c",
+      "soft_float_image_bytes": 342772,
+      "disassembly": {
+        "fpu": {
+          "vfp_f32_arith_instructions": 324,
+          "soft_float_helper_calls": 4,
+          "project_vfp_f32_arith_instructions": 125,
+          "project_soft_float_helper_calls": 0,
+          "project_functions_counted": 8
+        },
+        "soft_float_archive": {
+          "vfp_f32_arith_instructions": 154,
+          "soft_float_helper_calls": 154,
+          "project_vfp_f32_arith_instructions": 0,
+          "project_soft_float_helper_calls": 116,
+          "project_functions_counted": 8
+        }
+      },
+      "objdump": "arm-none-eabi-objdump",
+      "plan": "docs/module8-review-fpu-plan.md"
+    },
+    "nano33ble_ekan_context_timing_fpu": {
+      "env": "nano33ble_ekan_context_timing_fpu",
+      "soft_float_base_env": "nano33ble_ekan_context_timing",
+      "created_utc": "2026-11-19T07:26:33.542115+00:00",
+      "build_log_check": {
+        "compile_lines": 68,
+        "compiler_and_linker_lines_checked": 69,
+        "preprocessor_lines_skipped": 1,
+        "response_file_lines_skipped": 0,
+        "lines_with_mfloat_abi_soft": 0,
+        "lines_lacking_softfp_fpu": 0
+      },
+      "size_lines": [
+        "RAM:   [====      ]  35.2% (used 92320 bytes from 262144 bytes)",
+        "Flash: [===       ]  34.9% (used 343084 bytes from 983040 bytes)"
+      ],
+      "image_sha256": "1e5eec76551367226e74305d34ebaee9a6e3a9ee9c3510aa7b81b9b065038809",
+      "image_bytes": 343084,
+      "soft_float_image_sha256": "cc5e724d6a19c5cfb79913b60ae2aa0236c83bbf24dcd87a127a34405f078fa7",
+      "soft_float_image_bytes": 345220,
+      "disassembly": {
+        "fpu": {
+          "vfp_f32_arith_instructions": 358,
+          "soft_float_helper_calls": 4,
+          "project_vfp_f32_arith_instructions": 121,
+          "project_soft_float_helper_calls": 0,
+          "project_functions_counted": 9
+        },
+        "soft_float_archive": {
+          "vfp_f32_arith_instructions": 154,
+          "soft_float_helper_calls": 192,
+          "project_vfp_f32_arith_instructions": 0,
+          "project_soft_float_helper_calls": 113,
+          "project_functions_counted": 9
+        }
+      },
+      "objdump": "arm-none-eabi-objdump",
+      "plan": "docs/module8-review-fpu-plan.md"
+    }
+  },
+  "board_pipeline_20261119": {
+    "status": "completed",
+    "protocol": "TIMING_REPLAY_V2 WINDOW=500 CONTEXT=250 STRIDE=250 N=2 THRESHOLD=0.50 CLOCK_HZ=64000000 GPIO=D2 ATTR16=0 INPUTS=16 PAIRS=IR,RED MODEL=EKAN16",
+    "image_env": "nano33ble_ekan_pipeline_timing_fpu",
+    "image_sha256": "b4d5dc6e269def3a57ec2fa1dc221fc018a14123c0ee4f257806a0cf1a645a21",
+    "upload_receipt_sha256": "2b754895fe62f73bda5add2fd5faa2e2bb6bb3c23d6b0b7f45f2518539299186",
+    "preregistration_sha256": "c989aeedad475aa58957215dbc7c0f54d2d65aecd72b4aa42f39a2a595c55449",
+    "probe_sha256": "39bdee1e37c62070b132cfdf248a8158746caa405de21b0ae8030065883fc3ff",
+    "locked_selected": "all",
+    "repetitions": 10,
+    "started_utc": "2026-11-19T07:29:44.116720+00:00",
+    "memory": [
+      "MEMORY 32768 952 1040 1040 0",
+      "MEMORY 32768 4616 1040 1040 0"
+    ],
+    "summary": {
+      "functional_decisions": 1243,
+      "functional_failed": 0,
+      "failed_by_check": {
+        "meta": 0,
+        "features": 0,
+        "probability": 0,
+        "states": 0,
+        "top3_order": 0,
+        "top3_deltas": 0,
+        "valid": 0
+      },
+      "max_probability_error": 5.662441253662109e-07,
+      "top3_not_identical_to_host": 0,
+      "candidates_board": 642,
+      "confirmed_board": 308,
+      "timed_decisions_failed": 0,
+      "calibration_cycles_max": 6,
+      "latency": {
+        "warmup_blocks": {
+          "count": 60,
+          "min_us": 203.828125,
+          "median_us": 203.84375,
+          "p95_us": 231.51874999999998,
+          "max_us": 247.48437499999997
+        },
+        "first_decision_after_reset": {
+          "count": 30,
+          "min_us": 16712.125,
+          "median_us": 16806.0234375,
+          "p95_us": 16897.609375,
+          "max_us": 16945.65625
+        },
+        "subsequent_decisions": {
+          "count": 180,
+          "min_us": 19552.28125,
+          "median_us": 19709.4609375,
+          "p95_us": 19770.43203125,
+          "max_us": 19795.40625
+        }
+      },
+      "max_block_ms": 19.79540625,
+      "fifo_headroom_ratio": 32.33073329828733,
+      "v2_reference": {
+        "subsequent_decision_median_ms": 444.3,
+        "p95_ms": 445.9,
+        "source": "IEEE draft 2026-11-12a; outputs/timing-v2-board-20261022-r2"
+      },
+      "soft_float_reference": {
+        "subsequent_decision_median_ms": 433.9,
+        "p95_ms": 435.4,
+        "source": "outputs/edge-kan-v1/board-pipeline-20261112"
+      },
+      "vs_soft_float_board": {
+        "comparable": true,
+        "decisions": 1243,
+        "source": "outputs/edge-kan-v1/board-pipeline-20261112/report.json",
+        "source_sha256": "aa0513161f7be0b915b92a8a9435381e59f37d0c6a6c0d55b19f8e69b90383c9",
+        "probability_bit_identical": 506,
+        "max_probability_difference": 5.960464477539062e-07,
+        "candidate_flag_differences_at_0_50": 0,
+        "confirmed_state_differences": 0,
+        "top3_differences": 0
+      }
+    }
+  },
+  "board_timing_20261119": {
+    "status": "completed",
+    "protocol": "TIMING_REPLAY_EKAN WINDOW=500 CONTEXT=250 STRIDE=250 N=2 CLOCK_HZ=64000000 GPIO=D2 INPUTS=16 PAIRS=IR,RED MODEL=EKAN16",
+    "image_sha256": "1e5eec76551367226e74305d34ebaee9a6e3a9ee9c3510aa7b81b9b065038809",
+    "upload_receipt_sha256": "e3da50b016fb68fd244dc7b24eeaa5f69d077bee4668a6ae26b5eaf8df2a73af",
+    "preregistration_sha256": "c989aeedad475aa58957215dbc7c0f54d2d65aecd72b4aa42f39a2a595c55449",
+    "repetitions": 10,
+    "kernel_repetitions_on_board": 5,
+    "clock_hz": 64000000,
+    "started_utc": "2026-11-19T08:05:52.885619+00:00",
+    "memory": [
+      "MEMORY 32768 1408 1040 1040 0",
+      "MEMORY 32768 5040 1040 1040 0"
+    ],
+    "summary": {
+      "decisions_timed": 210,
+      "checks_failed": 0,
+      "calibration_cycles_max": 6,
+      "decision_block_v2_pipeline": {
+        "median_us": 19185.2265625,
+        "max_us": 19338.34375,
+        "min_us": 16284.5
+      },
+      "nondecision_block": {
+        "median_us": 180.46875,
+        "max_us": 244.3125,
+        "min_us": 180.46875
+      },
+      "tinykan_forward_min_cycles": {
+        "median_us": 148.53125,
+        "max_us": 150.34375,
+        "min_us": 146.75
+      },
+      "tinykan_xai_17pass_min_cycles": {
+        "median_us": 2553.1953125,
+        "max_us": 2605.140625,
+        "min_us": 2529.859375
+      },
+      "edge_forward_min_cycles": {
+        "median_us": 488.0546875,
+        "max_us": 506.578125,
+        "min_us": 486.921875
+      },
+      "edge_xai_incremental_min_cycles": {
+        "median_us": 3001.4296875,
+        "max_us": 3005.875,
+        "min_us": 2953.546875
+      },
+      "kernel_max_over_reps_us": {
+        "tk_forward": 228.375,
+        "tk_xai": 2635.90625,
+        "edge_forward": 534.703125,
+        "edge_xai": 3007.953125
+      },
+      "derived_edge_decision_block": {
+        "median_us": 19618.359375,
+        "max_us": 19743.8125,
+        "min_us": 16721.265625,
+        "note": "block - TinyKAN XAI min + edge XAI min; derived, not measured"
+      },
+      "fifo_budget_ms": 640.0
+    }
+  }
+}

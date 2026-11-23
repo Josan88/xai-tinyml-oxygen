@@ -15,6 +15,10 @@ Host edge expectations come from tests/edge_kan_probe.cpp built as in train_edge
 (outputs/edge-kan-label0/host-parity/edge_kan_probe_ekan16_ref0.exe), output under
 outputs/edge-kan-label0/, and one more check per decision: the board's edge probability and deltas
 against the Python float64 label-0 deltas on the same C++ host features (1e-4, 1e-5).
+
+--fpu (docs/module8-review-fpu-plan.md, Module 8 review M11): the hardware-FPU builds of the same envs
+(outputs/firmware-ekan-fpu/<env>_fpu), same identities, probe and gates, output under outputs/edge-kan-fpu/;
+the pipeline summary adds a decision-by-decision comparison with the soft-float board run of 12 Nov.
 """
 import argparse
 from datetime import datetime, timezone
@@ -111,6 +115,24 @@ def configure_ref0():
     PIPELINE_ENV = "nano33ble_ekan_pipeline_timing_ref0"
     PIPELINE_IDENTITY = PIPELINE_IDENTITY + " XAI_REF=LABEL0"
     REF0 = True
+
+
+FPU = False
+
+
+def configure_fpu():
+    """Switch archives, envs and output to the hardware-FPU builds (docs/module8-review-fpu-plan.md).
+
+    Same firmware identities, prepared set, host probe and gates as the soft-float jobs; only the image differs.
+    """
+    global PREREG, PIPELINE_PREREG, OUT_ROOT, ARCHIVE_ROOT, FPU, PIPELINE_ENV
+    PREREG = PIPELINE_PREREG = ROOT / "docs/module8-review-fpu-plan.md"
+    OUT_ROOT = ROOT / "outputs/edge-kan-fpu"
+    ARCHIVE_ROOT = ROOT / "outputs/firmware-ekan-fpu"
+    for job in ("parity", "timing"):
+        PROFILES[job] = (PROFILES[job][0] + "_fpu", PROFILES[job][1])
+    PIPELINE_ENV = PIPELINE_ENV + "_fpu"
+    FPU = True
 
 
 def python_label0(features):
@@ -402,6 +424,26 @@ def judge_integrated(words, total, cpp_row, edge_p, edge_d, states, py=None):
             "top3_identical": [i for i, _ in top] == expected_top, "states": got_states}
 
 
+SOFT_PIPELINE = ROOT / "outputs/edge-kan-v1/board-pipeline-20261112/report.json"
+
+
+def compare_soft_float(rows):
+    """FPU board decisions against the soft-float board run (same prepared set, same stream order)."""
+    soft = json.loads(SOFT_PIPELINE.read_text())
+    srows = [v for s in soft["functional"] for v in s["decisions"]]
+    if len(srows) != len(rows):
+        return {"comparable": False, "note": f"{len(rows)} FPU vs {len(srows)} soft-float decisions"}
+    dp = [abs(a["probability"] - b["probability"]) for a, b in zip(rows, srows)]
+    return {"comparable": True, "decisions": len(rows), "source": SOFT_PIPELINE.relative_to(ROOT).as_posix(),
+            "source_sha256": sha256(SOFT_PIPELINE),
+            "probability_bit_identical": sum(a["probability"] == b["probability"] for a, b in zip(rows, srows)),
+            "max_probability_difference": max(dp),
+            "candidate_flag_differences_at_0_50": sum((a["probability"] >= .5) != (b["probability"] >= .5)
+                                                      for a, b in zip(rows, srows)),
+            "confirmed_state_differences": sum(a["states"][1] != b["states"][1] for a, b in zip(rows, srows)),
+            "top3_differences": sum(a["top3"] != b["top3"] for a, b in zip(rows, srows))}
+
+
 def run_pipeline(args, streams):
     image_sha = verify_image(PIPELINE_ENV, args.upload_receipt)
     selected = [s for s in streams if s["kind"] == "fixture"] + \
@@ -498,7 +540,10 @@ def run_pipeline(args, streams):
             "v2_reference": {"subsequent_decision_median_ms": 444.3, "p95_ms": 445.9,
                              "source": "IEEE draft 2026-11-12a; outputs/timing-v2-board-20261022-r2"},
             **({"training_mean_edge_reference": {"subsequent_decision_median_ms": 433.9, "p95_ms": 435.4,
-                                                 "source": "outputs/edge-kan-v1/board-pipeline-20261112"}} if REF0 else {})})
+                                                 "source": "outputs/edge-kan-v1/board-pipeline-20261112"}} if REF0 else {}),
+            **({"soft_float_reference": {"subsequent_decision_median_ms": 433.9, "p95_ms": 435.4,
+                                         "source": "outputs/edge-kan-v1/board-pipeline-20261112"},
+                "vs_soft_float_board": compare_soft_float(rows)} if FPU else {})})
     except BaseException as error:
         report.update(status="failed", error=f"{type(error).__name__}: {error}")
         raise
@@ -517,9 +562,14 @@ def main():
     parser.add_argument("--locked", default="all")
     parser.add_argument("--repetitions", type=int, default=10)
     parser.add_argument("--ref0", action="store_true", help="label-0-reference images (docs/edge-kan-label0-board-preregistration.md)")
+    parser.add_argument("--fpu", action="store_true", help="hardware-FPU images (docs/module8-review-fpu-plan.md)")
     args = parser.parse_args()
+    if args.ref0 and args.fpu:
+        parser.error("--ref0 and --fpu are separate jobs")
     if args.ref0:
         configure_ref0()
+    if args.fpu:
+        configure_fpu()
     streams, _ = load_prepared()
     if args.job == "host-check":
         rows = np.concatenate([s["cpp"] for s in streams])
